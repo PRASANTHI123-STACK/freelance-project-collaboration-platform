@@ -40,3 +40,14 @@ communication, and payment management.
 - Git
 - Git Bash
 - GitHub
+## User Authentication
+
+The platform supports secure user authentication for clients and freelancers.
+
+### Authentication Features
+
+- Client registration
+- Freelancer registration
+- User login
+- Profile management
+- Password reset
