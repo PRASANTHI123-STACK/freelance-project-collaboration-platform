@@ -51,3 +51,8 @@ The platform supports secure user authentication for clients and freelancers.
 - User login
 - Profile management
 - Password reset
+## Post Project
+
+The platform allows clients to create and publish projects for
+freelancers.
+
