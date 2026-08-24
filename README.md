@@ -55,4 +55,23 @@ The platform supports secure user authentication for clients and freelancers.
 
 The platform allows clients to create and publish projects for
 freelancers.
+## Project Setup
 
+### Prerequisites
+
+- Git
+- Python
+- A web browser
+- Visual Studio Code
+
+### Project Structure
+
+- `frontend/` – Frontend HTML files
+- `backend/` – Backend source files
+- `docs/` – Project documentation
+
+### Running the Project
+
+Open `frontend/index.html` in a web browser to view the frontend.
+
+The project uses Git and GitHub for collaborative development.
