@@ -3,125 +3,496 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Freelance Project Collaboration Platform</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f7fb;
+            color: #222;
+        }
+
+        /* Navigation */
+        nav {
+            background: #1e3a8a;
+            padding: 18px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav h2 {
+            color: white;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            cursor: pointer;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: #dbeafe;
+            padding: 70px 30px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 40px;
+            color: #1e3a8a;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 750px;
+            margin: auto;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            margin-top: 30px;
+        }
+
+        .hero-buttons button {
+            margin: 8px;
+        }
+
+        /* Buttons */
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        /* Sections */
+        .section {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 30px;
+        }
+
+        .section h2 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+        }
+
+        /* Feature Cards */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            color: #2563eb;
+            margin-bottom: 10px;
+        }
+
+        /* Forms */
+        .form-container {
+            background: white;
+            max-width: 650px;
+            margin: 30px auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+        }
+
+        .form-container h2 {
+            margin-bottom: 20px;
+            color: #1e3a8a;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-container button {
+            margin-top: 20px;
+        }
+
+        /* Hide sections initially */
+        .page-section {
+            display: none;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background: #1e3a8a;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+    </style>
 </head>
 
 <body>
+
+<!-- Navigation -->
+<nav>
+    <h2>FreelanceHub</h2>
+
+    <div>
+        <a onclick="showSection('home')">Home</a>
+        <a onclick="showSection('client')">Client</a>
+        <a onclick="showSection('freelancer')">Freelancer</a>
+        <a onclick="showSection('login')">Login</a>
+        <a onclick="showSection('profile')">Profile</a>
+        <a onclick="showSection('post-project')">Post Project</a>
+    </div>
+</nav>
+
+
+<!-- HOME -->
+<section id="home" class="page-section active">
+
+    <div class="hero">
+
+        <h1>Freelance Project Collaboration Platform</h1>
+
+        <p>
+            A collaborative platform that connects clients and freelancers
+            for project posting, collaboration and management.
+        </p>
+
+        <div class="hero-buttons">
+            <button onclick="showSection('client')">
+                Client Registration
+            </button>
+
+            <button onclick="showSection('freelancer')">
+                Freelancer Registration
+            </button>
+
+            <button onclick="showSection('login')">
+                User Login
+            </button>
+        </div>
+
+    </div>
+
+
+    <div class="section">
+
+        <h2>Platform Features</h2>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>User Authentication</h3>
+                <p>
+                    Secure registration and login for clients and freelancers.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Manage Profile</h3>
+                <p>
+                    Users can manage their personal and professional information.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Post Projects</h3>
+                <p>
+                    Clients can create and publish projects for freelancers.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Browse Projects</h3>
+                <p>
+                    Freelancers can browse available projects.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CLIENT REGISTRATION -->
+<section id="client" class="page-section">
+
+    <div class="form-container">
+
+        <h2>Client Registration</h2>
+
+        <form onsubmit="registerClient(event)">
+
+            <label>Full Name</label>
+            <input type="text" id="clientName" required>
+
+            <label>Email</label>
+            <input type="email" id="clientEmail" required>
+
+            <label>Password</label>
+            <input type="password" id="clientPassword" required>
+
+            <button type="submit">
+                Register as Client
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- FREELANCER REGISTRATION -->
+<section id="freelancer" class="page-section">
+
+    <div class="form-container">
+
+        <h2>Freelancer Registration</h2>
+
+        <form onsubmit="registerFreelancer(event)">
+
+            <label>Full Name</label>
+            <input type="text" id="freelancerName" required>
+
+            <label>Email</label>
+            <input type="email" id="freelancerEmail" required>
+
+            <label>Password</label>
+            <input type="password" id="freelancerPassword" required>
+
+            <label>Skills</label>
+            <input type="text" id="skills" required>
+
+            <button type="submit">
+                Register as Freelancer
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- LOGIN -->
+<section id="login" class="page-section">
+
+    <div class="form-container">
+
+        <h2>User Login</h2>
+
+        <form onsubmit="loginUser(event)">
+
+            <label>Email</label>
+            <input type="email" id="loginEmail" required>
+
+            <label>Password</label>
+            <input type="password" id="loginPassword" required>
+
+            <button type="submit">
+                Login
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- MANAGE PROFILE -->
+<section id="profile" class="page-section">
+
+    <div class="form-container">
+
+        <h2>Manage Profile</h2>
+
+        <form onsubmit="updateProfile(event)">
+
+            <label>Full Name</label>
+            <input type="text" id="profileName" required>
+
+            <label>Email</label>
+            <input type="email" id="profileEmail" required>
+
+            <label>Phone</label>
+            <input type="tel" id="profilePhone" required>
+
+            <label>Skills</label>
+            <input type="text" id="profileSkills">
+
+            <label>Bio</label>
+            <textarea id="profileBio"></textarea>
+
+            <button type="submit">
+                Update Profile
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- POST PROJECT -->
+<section id="post-project" class="page-section">
+
+    <div class="form-container">
+
+        <h2>Post Project</h2>
+
+        <form onsubmit="postProject(event)">
+
+            <label>Project Title</label>
+            <input type="text" id="projectTitle" required>
+
+            <label>Project Description</label>
+            <textarea id="projectDescription" required></textarea>
+
+            <label>Budget</label>
+            <input type="number" id="budget" required>
+
+            <label>Deadline</label>
+            <input type="date" id="deadline" required>
+
+            <button type="submit">
+                Post Project
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<footer>
     <p>
-    Freelance Project Collaboration Platform connects clients and
-    freelancers for project collaboration and management.
-</p>
+        © 2026 Freelance Project Collaboration Platform
+    </p>
+</footer>
 
-    <h1>Freelance Project Collaboration Platform</h1>
 
-    <h2>User Authentication</h2>
+<script>
 
-    <button>Client Registration</button>
-    <button>Freelancer Registration</button>
-    <button>User Login</button>
+    function showSection(sectionId) {
 
-    <h2>Project Management</h2>
+        const sections = document.querySelectorAll(".page-section");
 
-    <button>Post Project</button>
-    <button>Browse Projects</button>
-    <h2>Client Registration</h2>
+        sections.forEach(function(section) {
+            section.classList.remove("active");
+        });
 
-<form>
-    <label>Full Name:</label>
-    <input type="text" name="name" required>
-    <br><br>
+        document.getElementById(sectionId).classList.add("active");
 
-    <label>Email:</label>
-    <input type="email" name="email" required>
-    <br><br>
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }
 
-    <label>Password:</label>
-    <input type="password" name="password" required>
-    <br><br>
 
-    <button type="submit">Register</button>
-</form>
-<h2>Freelancer Registration</h2>
+    function registerClient(event) {
 
-<form>
-    <label>Full Name:</label>
-    <input type="text" name="freelancer-name" required>
-    <br><br>
+        event.preventDefault();
 
-    <label>Email:</label>
-    <input type="email" name="freelancer-email" required>
-    <br><br>
+        alert("Client registration submitted successfully!");
 
-    <label>Password:</label>
-    <input type="password" name="freelancer-password" required>
-    <br><br>
+        event.target.reset();
+    }
 
-    <label>Skills:</label>
-    <input type="text" name="skills" required>
-    <br><br>
 
-    <button type="submit">Register as Freelancer</button>
-</form>
-<h2>User Login</h2>
+    function registerFreelancer(event) {
 
-<form>
-    <label>Email:</label>
-    <input type="email" name="login-email" required>
-    <br><br>
+        event.preventDefault();
 
-    <label>Password:</label>
-    <input type="password" name="login-password" required>
-    <br><br>
+        alert("Freelancer registration submitted successfully!");
 
-    <button type="submit">Login</button>
-</form>
-<h2>Manage Profile</h2>
+        event.target.reset();
+    }
 
-<form>
-    <label>Full Name:</label>
-    <input type="text" name="profile-name" required>
-    <br><br>
 
-    <label>Email:</label>
-    <input type="email" name="profile-email" required>
-    <br><br>
+    function loginUser(event) {
 
-    <label>Phone:</label>
-    <input type="tel" name="profile-phone" required>
-    <br><br>
+        event.preventDefault();
 
-    <label>Skills:</label>
-    <input type="text" name="profile-skills">
-    <br><br>
+        alert("Login submitted successfully!");
 
-    <label>Bio:</label>
-    <textarea name="profile-bio"></textarea>
-    <br><br>
+        event.target.reset();
+    }
 
-    <button type="submit">Update Profile</button>
-</form>
-<h2>Post Project</h2>
 
-<form>
-    <label>Project Title:</label>
-    <input type="text" name="project-title" required>
-    <br><br>
+    function updateProfile(event) {
 
-    <label>Project Description:</label>
-    <textarea name="project-description" required></textarea>
-    <br><br>
+        event.preventDefault();
 
-    <label>Budget:</label>
-    <input type="number" name="budget" required>
-    <br><br>
+        alert("Profile updated successfully!");
 
-    <label>Deadline:</label>
-    <input type="date" name="deadline" required>
-    <br><br>
+        event.target.reset();
+    }
 
-    <button type="submit">Post Project</button>
-</form>
 
+    function postProject(event) {
+
+        event.preventDefault();
+
+        alert("Project posted successfully!");
+
+        event.target.reset();
+    }
+
+</script>
 
 </body>
 </html>
