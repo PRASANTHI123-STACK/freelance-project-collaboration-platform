@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Manage Profile - FreelanceHub</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f7fb;
+            color: #222;
+        }
+
+        nav {
+            background: #1e3a8a;
+            padding: 18px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav h2 {
+            color: white;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .profile-container {
+            max-width: 650px;
+            margin: 50px auto;
+            padding: 35px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-container h1 {
+            text-align: center;
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+
+        .profile-container p {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 15px;
+            margin-bottom: 6px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 25px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .back-link a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer {
+            background: #1e3a8a;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 70px;
+        }
+
+        @media (max-width: 700px) {
+            nav {
+                padding: 15px 20px;
+            }
+
+            nav div {
+                display: none;
+            }
+
+            .profile-container {
+                margin: 30px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+
+    <nav>
+
+        <h2>FreelanceHub</h2>
+
+        <div>
+            <a href="index.html">Home</a>
+            <a href="register.html">Register</a>
+            <a href="login.html">Login</a>
+            <a href="profile.html">Profile</a>
+            <a href="post-project.html">Post Project</a>
+        </div>
+
+    </nav>
+
+
+    <!-- Profile -->
+
+    <div class="profile-container">
+
+        <h1>Manage Profile</h1>
+
+        <p>
+            Update your personal and professional information.
+        </p>
+
+        <form onsubmit="updateProfile(event)">
+
+            <label>Full Name</label>
+
+            <input
+                type="text"
+                id="profileName"
+                placeholder="Enter your full name"
+                required
+            >
+
+
+            <label>Email</label>
+
+            <input
+                type="email"
+                id="profileEmail"
+                placeholder="Enter your email"
+                required
+            >
+
+
+            <label>Phone</label>
+
+            <input
+                type="tel"
+                id="profilePhone"
+                placeholder="Enter your phone number"
+                required
+            >
+
+
+            <label>Skills</label>
+
+            <input
+                type="text"
+                id="profileSkills"
+                placeholder="e.g. Web Development, Python, Java"
+            >
+
+
+            <label>Bio</label>
+
+            <textarea
+                id="profileBio"
+                placeholder="Tell us about yourself"
+            ></textarea>
+
+
+            <button type="submit">
+                Update Profile
+            </button>
+
+        </form>
+
+
+        <div class="back-link">
+
+            <p>
+                <a href="index.html">
+                    ← Back to Home
+                </a>
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        <p>
+            © 2026 Freelance Project Collaboration Platform
+        </p>
+
+    </footer>
+
+
+    <script>
+
+        function updateProfile(event) {
+
+            event.preventDefault();
+
+            const name =
+                document.getElementById("profileName").value;
+
+            alert(
+                "Profile updated successfully for " + name
+            );
+
+            event.target.reset();
+        }
+
+    </script>
+
+</body>
+
+</html>

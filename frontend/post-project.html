@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Post a Project - FreelanceHub</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <a href="index.html" class="logo">
+        Freelance<span>Hub</span>
+    </a>
+
+    <ul class="nav-links">
+
+        <li>
+            <a href="client-dashboard.html">Dashboard</a>
+        </li>
+
+        <li>
+            <a href="post-project.html">Post Project</a>
+        </li>
+
+        <li>
+            <a href="my-projects.html">My Projects</a>
+        </li>
+
+        <li>
+            <a href="profile.html">Profile</a>
+        </li>
+
+    </ul>
+
+    <div class="nav-buttons">
+
+        <a href="index.html" class="btn-login">
+            Logout
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- ================= POST PROJECT ================= -->
+
+<main class="post-project-page">
+
+    <div class="post-project-header">
+
+        <span class="hero-badge">
+            CLIENT WORKSPACE
+        </span>
+
+        <h1>
+            Post a New Project
+        </h1>
+
+        <p>
+            Tell freelancers what you need and find
+            the right talent for your project.
+        </p>
+
+    </div>
+
+
+    <div class="post-project-layout">
+
+
+        <!-- ================= FORM ================= -->
+
+        <section class="project-form-card">
+
+            <form onsubmit="publishProject(event)">
+
+                <!-- Project Information -->
+
+                <div class="form-section">
+
+                    <h2>
+                        Project Information
+                    </h2>
+
+                    <p>
+                        Provide the basic details about your project.
+                    </p>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Project Title
+                    </label>
+
+                    <input
+                        type="text"
+                        id="projectTitle"
+                        placeholder="e.g. Build an E-Commerce Website"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Project Description
+                    </label>
+
+                    <textarea
+                        id="projectDescription"
+                        placeholder="Describe your project, requirements and expected outcome..."
+                        required></textarea>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label>
+                            Category
+                        </label>
+
+                        <select id="category" required>
+
+                            <option value="">
+                                Select category
+                            </option>
+
+                            <option>
+                                Web Development
+                            </option>
+
+                            <option>
+                                Mobile Development
+                            </option>
+
+                            <option>
+                                UI/UX Design
+                            </option>
+
+                            <option>
+                                Data Science
+                            </option>
+
+                            <option>
+                                Digital Marketing
+                            </option>
+
+                            <option>
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Project Type
+                        </label>
+
+                        <select id="projectType" required>
+
+                            <option value="">
+                                Select type
+                            </option>
+
+                            <option>
+                                Fixed Price
+                            </option>
+
+                            <option>
+                                Hourly
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Skills -->
+
+                <div class="form-group">
+
+                    <label>
+                        Skills Required
+                    </label>
+
+                    <input
+                        type="text"
+                        id="skills"
+                        placeholder="e.g. HTML, CSS, JavaScript, React"
+                        required>
+
+                    <small>
+                        Separate multiple skills with commas.
+                    </small>
+
+                </div>
+
+
+                <!-- Budget and Deadline -->
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label>
+                            Budget (₹)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="budget"
+                            placeholder="e.g. 25000"
+                            min="1"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Deadline
+                        </label>
+
+                        <input
+                            type="date"
+                            id="deadline"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Experience -->
+
+                <div class="form-group">
+
+                    <label>
+                        Freelancer Experience
+                    </label>
+
+                    <select id="experience" required>
+
+                        <option value="">
+                            Select experience level
+                        </option>
+
+                        <option>
+                            Beginner
+                        </option>
+
+                        <option>
+                            Intermediate
+                        </option>
+
+                        <option>
+                            Expert
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Submit -->
+
+                <div class="form-actions">
+
+                    <a
+                        href="client-dashboard.html"
+                        class="secondary-btn">
+
+                        Cancel
+
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="primary-btn">
+
+                        Publish Project
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <!-- ================= SIDEBAR ================= -->
+
+        <aside class="project-tips">
+
+            <h2>
+                💡 Tips for a great project
+            </h2>
+
+            <div class="tip">
+
+                <strong>
+                    Be specific
+                </strong>
+
+                <p>
+                    Clearly explain what you want
+                    the freelancer to deliver.
+                </p>
+
+            </div>
+
+
+            <div class="tip">
+
+                <strong>
+                    Set a realistic budget
+                </strong>
+
+                <p>
+                    A suitable budget helps attract
+                    qualified freelancers.
+                </p>
+
+            </div>
+
+
+            <div class="tip">
+
+                <strong>
+                    Mention required skills
+                </strong>
+
+                <p>
+                    Add the technologies and skills
+                    needed for the project.
+                </p>
+
+            </div>
+
+
+            <div class="tip">
+
+                <strong>
+                    Set a clear deadline
+                </strong>
+
+                <p>
+                    Give freelancers enough time
+                    to complete the work.
+                </p>
+
+            </div>
+
+        </aside>
+
+    </div>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <div class="footer-container">
+
+        <div>
+
+            <h3>
+                FreelanceHub
+            </h3>
+
+            <p>
+                Connecting clients and freelancers
+                to build successful projects together.
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                Platform
+            </h3>
+
+            <a href="client-dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="post-project.html">
+                Post Project
+            </a>
+
+            <a href="my-projects.html">
+                My Projects
+            </a>
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                Account
+            </h3>
+
+            <a href="profile.html">
+                Profile
+            </a>
+
+            <a href="index.html">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        © 2026 FreelanceHub. All rights reserved.
+
+    </div>
+
+</footer>
+
+
+<script>
+
+function publishProject(event) {
+
+    event.preventDefault();
+
+    const title =
+        document.getElementById("projectTitle").value;
+
+    const category =
+        document.getElementById("category").value;
+
+    const budget =
+        document.getElementById("budget").value;
+
+    alert(
+        "Project Published Successfully!\n\n" +
+        "Project: " + title + "\n" +
+        "Category: " + category + "\n" +
+        "Budget: ₹" + budget
+    );
+
+    event.target.reset();
+
+    window.location.href = "client-dashboard.html";
+}
+
+</script>
+<script>
+
+function publishProject(event) {
+
+    event.preventDefault();
+
+    const project = {
+        id: Date.now(),
+
+        title: document.getElementById("projectTitle").value,
+
+        description:
+            document.getElementById("projectDescription").value,
+
+        category:
+            document.getElementById("category").value,
+
+        projectType:
+            document.getElementById("projectType").value,
+
+        skills:
+            document.getElementById("skills").value,
+
+        budget:
+            document.getElementById("budget").value,
+
+        deadline:
+            document.getElementById("deadline").value,
+
+        experience:
+            document.getElementById("experience").value,
+
+        status: "Open",
+
+        proposals: 0,
+
+        createdAt: new Date().toLocaleDateString()
+    };
+
+
+    // Get existing projects
+    let projects =
+        JSON.parse(localStorage.getItem("projects")) || [];
+
+
+    // Add new project
+    projects.push(project);
+
+
+    // Save projects
+    localStorage.setItem(
+        "projects",
+        JSON.stringify(projects)
+    );
+
+
+    alert(
+        "Project Published Successfully!"
+    );
+
+
+    // Go to My Projects
+    window.location.href = "projects.html";
+}
+
+</script>
+
+</body>
+
+</html>

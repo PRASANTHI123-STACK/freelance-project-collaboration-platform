@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Register - FreelanceHub</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <a href="index.html" class="logo">
+        Freelance<span>Hub</span>
+    </a>
+
+
+    <ul class="nav-links">
+
+        <li>
+            <a href="index.html">
+                Home
+            </a>
+        </li>
+
+        <li>
+            <a href="index.html#categories">
+                Categories
+            </a>
+        </li>
+
+        <li>
+            <a href="index.html#projects">
+                Projects
+            </a>
+        </li>
+
+        <li>
+            <a href="index.html#how-it-works">
+                How It Works
+            </a>
+        </li>
+
+    </ul>
+
+
+    <div class="nav-buttons">
+
+        <a
+            href="login.html"
+            class="btn-login">
+
+            Login
+
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<!-- ================= REGISTER PAGE ================= -->
+
+<main class="register-page">
+
+
+    <div class="register-header">
+
+        <span class="hero-badge">
+            🚀 Join FreelanceHub
+        </span>
+
+
+        <h1>
+            Create your account
+        </h1>
+
+
+        <p>
+            Choose how you want to use FreelanceHub
+            and start collaborating today.
+        </p>
+
+    </div>
+
+
+
+    <div class="registration-options">
+
+
+
+        <!-- ================= CLIENT ================= -->
+
+        <section class="registration-card">
+
+
+            <div class="registration-icon">
+                💼
+            </div>
+
+
+            <span class="registration-label">
+                FOR CLIENTS
+            </span>
+
+
+            <h2>
+                Hire talented freelancers
+            </h2>
+
+
+            <p class="registration-description">
+
+                Post your projects, receive proposals
+                and work with skilled professionals.
+
+            </p>
+
+
+
+            <form
+                id="clientForm"
+                onsubmit="registerClient(event)">
+
+
+                <div class="form-group">
+
+                    <label for="clientName">
+                        Full Name
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="clientName"
+                        placeholder="Enter your full name"
+                        required>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label for="clientEmail">
+                        Email Address
+                    </label>
+
+
+                    <input
+                        type="email"
+                        id="clientEmail"
+                        placeholder="you@example.com"
+                        required>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label for="clientPassword">
+                        Password
+                    </label>
+
+
+                    <input
+                        type="password"
+                        id="clientPassword"
+                        placeholder="Create a strong password"
+                        minlength="6"
+                        required>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label for="clientConfirmPassword">
+                        Confirm Password
+                    </label>
+
+
+                    <input
+                        type="password"
+                        id="clientConfirmPassword"
+                        placeholder="Confirm your password"
+                        minlength="6"
+                        required>
+
+                </div>
+
+
+
+                <label class="terms">
+
+                    <input
+                        type="checkbox"
+                        required>
+
+                    <span>
+
+                        I agree to the
+                        <a href="#">
+                            Terms & Conditions
+                        </a>
+
+                    </span>
+
+                </label>
+
+
+
+                <button
+                    type="submit"
+                    class="primary-btn full-btn">
+
+                    Create Client Account
+
+                </button>
+
+
+            </form>
+
+
+        </section>
+
+
+
+        <!-- ================= FREELANCER ================= -->
+
+        <section class="registration-card">
+
+
+            <div class="registration-icon freelancer-icon">
+                👨‍💻
+            </div>
+
+
+            <span class="registration-label">
+                FOR FREELANCERS
+            </span>
+
+
+            <h2>
+                Find your next opportunity
+            </h2>
+
+
+            <p class="registration-description">
+
+                Showcase your skills, discover projects
+                and build your freelance career.
+
+            </p>
+
+
+
+            <form
+                id="freelancerForm"
+                onsubmit="registerFreelancer(event)">
+
+
+                <div class="form-group">
+
+                    <label for="freelancerName">
+                        Full Name
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="freelancerName"
+                        placeholder="Enter your full name"
+                        required>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label for="freelancerEmail">
+                        Email Address
+                    </label>
+
+
+                    <input
+                        type="email"
+                        id="freelancerEmail"
+                        placeholder="you@example.com"
+                        required>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label for="freelancerPassword">
+                        Password
+                    </label>
+
+
+                    <input
+                        type="password"
+                        id="freelancerPassword"
+                        placeholder="Create a strong password"
+                        minlength="6"
+                        required>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label for="freelancerConfirmPassword">
+                        Confirm Password
+                    </label>
+
+
+                    <input
+                        type="password"
+                        id="freelancerConfirmPassword"
+                        placeholder="Confirm your password"
+                        minlength="6"
+                        required>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label for="freelancerSkills">
+                        Primary Skill
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="freelancerSkills"
+                        placeholder="e.g. Web Development"
+                        required>
+
+                </div>
+
+
+
+                <label class="terms">
+
+                    <input
+                        type="checkbox"
+                        required>
+
+                    <span>
+
+                        I agree to the
+                        <a href="#">
+                            Terms & Conditions
+                        </a>
+
+                    </span>
+
+                </label>
+
+
+
+                <button
+                    type="submit"
+                    class="primary-btn full-btn">
+
+                    Create Freelancer Account
+
+                </button>
+
+
+            </form>
+
+
+        </section>
+
+
+    </div>
+
+
+
+    <div class="login-prompt">
+
+        Already have an account?
+
+        <a href="login.html">
+            Login to FreelanceHub
+        </a>
+
+    </div>
+
+
+</main>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+
+    <div class="footer-container">
+
+
+        <div>
+
+            <h3>
+                FreelanceHub
+            </h3>
+
+
+            <p>
+
+                Connecting clients and freelancers
+                to build successful projects together.
+
+            </p>
+
+        </div>
+
+
+
+        <div>
+
+            <h3>
+                Platform
+            </h3>
+
+
+            <a href="index.html">
+                Home
+            </a>
+
+
+            <a href="index.html#projects">
+                Browse Projects
+            </a>
+
+
+            <a href="index.html#categories">
+                Categories
+            </a>
+
+        </div>
+
+
+
+        <div>
+
+            <h3>
+                Account
+            </h3>
+
+
+            <a href="login.html">
+                Login
+            </a>
+
+
+            <a href="register.html">
+                Register
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="footer-bottom">
+
+        © 2026 FreelanceHub. All rights reserved.
+
+    </div>
+
+
+</footer>
+
+
+
+<script>
+
+
+/* =====================================================
+   GET USERS
+===================================================== */
+
+function getUsers() {
+
+    return JSON.parse(
+        localStorage.getItem("users")
+    ) || [];
+
+}
+
+
+
+/* =====================================================
+   SAVE USERS
+===================================================== */
+
+function saveUsers(users) {
+
+    localStorage.setItem(
+        "users",
+        JSON.stringify(users)
+    );
+
+}
+
+
+
+/* =====================================================
+   CHECK EMAIL
+===================================================== */
+
+function emailExists(email) {
+
+    const users = getUsers();
+
+    return users.some(
+        function(user) {
+
+            return (
+                String(user.email)
+                    .toLowerCase()
+                    .trim()
+                ===
+                email.toLowerCase().trim()
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =====================================================
+   REGISTER CLIENT
+===================================================== */
+
+function registerClient(event) {
+
+    event.preventDefault();
+
+
+    const name =
+        document
+            .getElementById("clientName")
+            .value
+            .trim();
+
+
+    const email =
+        document
+            .getElementById("clientEmail")
+            .value
+            .trim()
+            .toLowerCase();
+
+
+    const password =
+        document
+            .getElementById("clientPassword")
+            .value;
+
+
+    const confirmPassword =
+        document
+            .getElementById(
+                "clientConfirmPassword"
+            )
+            .value;
+
+
+
+    /* PASSWORD CHECK */
+
+    if (password !== confirmPassword) {
+
+        alert(
+            "Passwords do not match."
+        );
+
+        return;
+
+    }
+
+
+
+    /* EMAIL CHECK */
+
+    if (emailExists(email)) {
+
+        alert(
+            "An account with this email already exists."
+        );
+
+        return;
+
+    }
+
+
+
+    /* CREATE USER */
+
+    const user = {
+
+        id:
+            Date.now(),
+
+        name:
+            name,
+
+        email:
+            email,
+
+        password:
+            password,
+
+        role:
+            "client",
+
+        skills:
+            "",
+
+        phone:
+            "",
+
+        bio:
+            "",
+
+        createdAt:
+            new Date().toISOString()
+
+    };
+
+
+
+    /* SAVE TO USERS */
+
+    const users =
+        getUsers();
+
+
+    users.push(user);
+
+
+    saveUsers(users);
+
+
+
+    /* ALSO SAVE TO CLIENTS */
+
+    const clients =
+        JSON.parse(
+            localStorage.getItem(
+                "clients"
+            )
+        ) || [];
+
+
+    clients.push(user);
+
+
+    localStorage.setItem(
+        "clients",
+        JSON.stringify(clients)
+    );
+
+
+
+    /* SUCCESS */
+
+    alert(
+        "Client account created successfully!"
+    );
+
+
+
+    /* GO TO LOGIN */
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+
+/* =====================================================
+   REGISTER FREELANCER
+===================================================== */
+
+function registerFreelancer(event) {
+
+    event.preventDefault();
+
+
+    const name =
+        document
+            .getElementById(
+                "freelancerName"
+            )
+            .value
+            .trim();
+
+
+    const email =
+        document
+            .getElementById(
+                "freelancerEmail"
+            )
+            .value
+            .trim()
+            .toLowerCase();
+
+
+    const password =
+        document
+            .getElementById(
+                "freelancerPassword"
+            )
+            .value;
+
+
+    const confirmPassword =
+        document
+            .getElementById(
+                "freelancerConfirmPassword"
+            )
+            .value;
+
+
+    const skills =
+        document
+            .getElementById(
+                "freelancerSkills"
+            )
+            .value
+            .trim();
+
+
+
+    /* PASSWORD CHECK */
+
+    if (
+        password !==
+        confirmPassword
+    ) {
+
+        alert(
+            "Passwords do not match."
+        );
+
+        return;
+
+    }
+
+
+
+    /* EMAIL CHECK */
+
+    if (emailExists(email)) {
+
+        alert(
+            "An account with this email already exists."
+        );
+
+        return;
+
+    }
+
+
+
+    /* CREATE FREELANCER */
+
+    const user = {
+
+        id:
+            Date.now(),
+
+        name:
+            name,
+
+        email:
+            email,
+
+        password:
+            password,
+
+        role:
+            "freelancer",
+
+        skills:
+            skills,
+
+        phone:
+            "",
+
+        bio:
+            "",
+
+        createdAt:
+            new Date().toISOString()
+
+    };
+
+
+
+    /* SAVE TO USERS */
+
+    const users =
+        getUsers();
+
+
+    users.push(user);
+
+
+    saveUsers(users);
+
+
+
+    /* ALSO SAVE TO FREELANCERS */
+
+    const freelancers =
+        JSON.parse(
+            localStorage.getItem(
+                "freelancers"
+            )
+        ) || [];
+
+
+    freelancers.push(user);
+
+
+    localStorage.setItem(
+        "freelancers",
+        JSON.stringify(
+            freelancers
+        )
+    );
+
+
+
+    /* SUCCESS */
+
+    alert(
+        "Freelancer account created successfully!"
+    );
+
+
+
+    /* GO TO LOGIN */
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
