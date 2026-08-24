@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Browse Projects - FreelanceHub</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .browse-page {
+            min-height: calc(100vh - 72px);
+            padding: 55px 7%;
+            background: #f8fafc;
+        }
+
+        .browse-header {
+            max-width: 1100px;
+            margin: 0 auto 30px;
+        }
+
+        .browse-header h1 {
+            font-size: 38px;
+            color: #111827;
+            margin: 12px 0 8px;
+        }
+
+        .browse-header p {
+            color: #6b7280;
+        }
+
+        .search-box {
+            max-width: 1100px;
+            margin: 0 auto 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 14px;
+            border: 1px solid #e5e7eb;
+
+            display: flex;
+            gap: 15px;
+        }
+
+        .search-box input,
+        .search-box select {
+            flex: 1;
+            padding: 13px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .search-box button {
+            padding: 13px 25px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .browse-grid {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .browse-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 20px;
+
+            box-shadow: 0 8px 25px rgba(0,0,0,0.04);
+        }
+
+        .browse-card-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .category-tag {
+            display: inline-block;
+            background: #eff6ff;
+            color: #2563eb;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .browse-card h2 {
+            margin: 12px 0 8px;
+            color: #111827;
+        }
+
+        .browse-card-description {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .open-tag {
+            background: #dcfce7;
+            color: #15803d;
+            padding: 6px 14px;
+            border-radius: 20px;
+            height: fit-content;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .browse-details {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+
+            margin-top: 22px;
+            padding: 20px 0;
+
+            border-top: 1px solid #e5e7eb;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .browse-details small {
+            display: block;
+            color: #9ca3af;
+            margin-bottom: 6px;
+        }
+
+        .browse-details strong {
+            color: #111827;
+        }
+
+        .skills {
+            margin-top: 18px;
+            color: #4b5563;
+        }
+
+        .browse-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 22px;
+        }
+
+        .view-btn,
+        .proposal-btn {
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .view-btn {
+            border: 1px solid #2563eb;
+            color: #2563eb;
+            background: white;
+        }
+
+        .proposal-btn {
+            border: none;
+            background: #2563eb;
+            color: white;
+        }
+
+        .no-projects {
+            max-width: 700px;
+            margin: 60px auto;
+            padding: 60px;
+            background: white;
+            text-align: center;
+            border-radius: 16px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .no-projects h2 {
+            color: #111827;
+        }
+
+        .no-projects p {
+            color: #6b7280;
+        }
+
+        @media (max-width: 800px) {
+
+            .search-box {
+                flex-direction: column;
+            }
+
+            .browse-details {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .browse-card-top {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .browse-details {
+                grid-template-columns: 1fr;
+            }
+
+            .browse-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<header class="navbar">
+
+    <a href="index.html" class="logo">
+        Freelance<span>Hub</span>
+    </a>
+
+    <ul class="nav-links">
+
+        <li>
+            <a href="freelancer-dashboard.html">
+                Dashboard
+            </a>
+        </li>
+
+        <li>
+            <a href="browse-projects.html">
+                Browse Projects
+            </a>
+        </li>
+
+        <li>
+            <a href="profile.html">
+                Profile
+            </a>
+        </li>
+
+    </ul>
+
+    <div class="nav-buttons">
+
+        <a href="index.html" class="btn-login">
+            Logout
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- PAGE -->
+
+<main class="browse-page">
+
+    <div class="browse-header">
+
+        <span class="hero-badge">
+            FREELANCER WORKSPACE
+        </span>
+
+        <h1>
+            Browse Projects
+        </h1>
+
+        <p>
+            Discover projects that match your skills
+            and submit proposals to clients.
+        </p>
+
+    </div>
+
+
+    <!-- SEARCH -->
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search projects...">
+
+        <select id="categoryFilter">
+
+            <option value="">
+                All Categories
+            </option>
+
+            <option value="Web Development">
+                Web Development
+            </option>
+
+            <option value="Mobile Development">
+                Mobile Development
+            </option>
+
+            <option value="UI/UX Design">
+                UI/UX Design
+            </option>
+
+            <option value="Data Science">
+                Data Science
+            </option>
+
+            <option value="Digital Marketing">
+                Digital Marketing
+            </option>
+
+        </select>
+
+        <button onclick="filterProjects()">
+            Search
+        </button>
+
+    </div>
+
+
+    <!-- PROJECTS -->
+
+    <section
+        id="browseProjects"
+        class="browse-grid">
+
+    </section>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+    <div class="footer-bottom">
+        © 2026 FreelanceHub. All rights reserved.
+    </div>
+
+</footer>
+
+
+<script>
+
+let allProjects = [];
+
+
+/* Load projects */
+
+function loadBrowseProjects() {
+
+    allProjects =
+        JSON.parse(
+            localStorage.getItem("projects")
+        ) || [];
+
+    displayProjects(allProjects);
+}
+
+
+/* Display projects */
+
+function displayProjects(projects) {
+
+    const container =
+        document.getElementById("browseProjects");
+
+
+    if (projects.length === 0) {
+
+        container.innerHTML = `
+
+            <div class="no-projects">
+
+                <h2>
+                    No Projects Available
+                </h2>
+
+                <p>
+                    There are currently no projects
+                    available for freelancers.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    container.innerHTML = "";
+
+
+    projects.forEach(project => {
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "browse-card";
+
+
+        card.innerHTML = `
+
+            <div class="browse-card-top">
+
+                <div>
+
+                    <span class="category-tag">
+                        ${project.category}
+                    </span>
+
+                    <h2>
+                        ${project.title}
+                    </h2>
+
+                    <p class="browse-card-description">
+                        ${project.description}
+                    </p>
+
+                </div>
+
+                <span class="open-tag">
+                    ${project.status}
+                </span>
+
+            </div>
+
+
+            <div class="browse-details">
+
+                <div>
+
+                    <small>
+                        Budget
+                    </small>
+
+                    <strong>
+                        ₹${project.budget}
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <small>
+                        Deadline
+                    </small>
+
+                    <strong>
+                        ${project.deadline}
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <small>
+                        Project Type
+                    </small>
+
+                    <strong>
+                        ${project.projectType}
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <small>
+                        Experience
+                    </small>
+
+                    <strong>
+                        ${project.experience}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="skills">
+
+                <strong>
+                    Skills:
+                </strong>
+
+                ${project.skills}
+
+            </div>
+
+
+            <div class="browse-actions">
+
+                <button
+                    class="view-btn"
+                    onclick="viewProject(${project.id})">
+
+                    View Project
+
+                </button>
+
+
+                <button
+                    class="proposal-btn"
+                    onclick="submitProposal(${project.id})">
+
+                    Submit Proposal
+
+                </button>
+
+            </div>
+
+        `;
+
+
+        container.appendChild(card);
+
+    });
+
+}
+
+
+/* Search */
+
+function filterProjects() {
+
+    const search =
+        document.getElementById(
+            "searchInput"
+        ).value.toLowerCase();
+
+
+    const category =
+        document.getElementById(
+            "categoryFilter"
+        ).value;
+
+
+    const filtered =
+        allProjects.filter(project => {
+
+            const matchesSearch =
+                project.title
+                    .toLowerCase()
+                    .includes(search) ||
+
+                project.description
+                    .toLowerCase()
+                    .includes(search) ||
+
+                project.skills
+                    .toLowerCase()
+                    .includes(search);
+
+
+            const matchesCategory =
+                !category ||
+                project.category === category;
+
+
+            return matchesSearch &&
+                   matchesCategory;
+
+        });
+
+
+    displayProjects(filtered);
+
+}
+
+
+/* View project */
+
+function viewProject(id) {
+
+    localStorage.setItem(
+        "selectedProject",
+        id
+    );
+
+    window.location.href =
+        "project-details.html";
+}
+
+
+/* Submit proposal */
+
+function submitProposal(id) {
+
+    localStorage.setItem(
+        "selectedProject",
+        id
+    );
+
+    window.location.href =
+        "submit-proposal.html";
+}
+
+
+/* Start */
+
+loadBrowseProjects();
+
+</script>
+
+</body>
+
+</html>

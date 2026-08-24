@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Submit Proposal - FreelanceHub</title>
+
+    <link rel="stylesheet"
+          href="style.css">
+
+    <style>
+
+        .proposal-page {
+            min-height: calc(100vh - 70px);
+            background: #f5f7fb;
+            padding: 45px 20px 70px;
+        }
+
+        .proposal-container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 25px;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .proposal-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 25px;
+            align-items: start;
+        }
+
+        .project-card,
+        .form-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+        }
+
+        .project-badge {
+            display: inline-block;
+            padding: 7px 14px;
+            background: #eff6ff;
+            color: #2563eb;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .project-card h1 {
+            margin: 18px 0 10px;
+            color: #111827;
+            font-size: 28px;
+        }
+
+        .project-description {
+            color: #64748b;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .project-details {
+            border-top: 1px solid #e5e7eb;
+            padding-top: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .detail-box span {
+            display: block;
+            color: #94a3b8;
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .detail-box strong {
+            display: block;
+            color: #111827;
+            font-size: 17px;
+        }
+
+        .form-card h2 {
+            margin: 0 0 8px;
+            color: #111827;
+            font-size: 27px;
+        }
+
+        .form-card > p {
+            margin: 0 0 25px;
+            color: #64748b;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #111827;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 13px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 9px;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            border: none;
+            border-radius: 9px;
+            padding: 14px;
+            background: #2563eb;
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .success-box {
+            display: none;
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #166534;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .success-box .check {
+            font-size: 35px;
+            margin-bottom: 8px;
+        }
+
+        .success-box h3 {
+            margin: 0 0 5px;
+        }
+
+        .success-box p {
+            margin: 0;
+        }
+
+        @media (max-width: 800px) {
+
+            .proposal-layout {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 500px) {
+
+            .project-details {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header class="navbar">
+
+    <a href="index.html"
+       class="logo">
+
+        Freelance<span>Hub</span>
+
+    </a>
+
+
+    <ul class="nav-links">
+
+        <li>
+            <a href="browse-projects.html">
+                Browse Projects
+            </a>
+        </li>
+
+        <li>
+            <a href="profile.html">
+                Profile
+            </a>
+        </li>
+
+    </ul>
+
+
+    <div class="nav-buttons">
+
+        <a href="index.html"
+           class="btn-login">
+
+            Logout
+
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="proposal-page">
+
+    <div class="proposal-container">
+
+
+        <a href="browse-projects.html"
+           class="back-link">
+
+            ← Back to Browse Projects
+
+        </a>
+
+
+        <div id="successBox"
+             class="success-box">
+
+            <div class="check">
+                ✓
+            </div>
+
+            <h3>
+                Proposal Submitted Successfully!
+            </h3>
+
+            <p>
+                Your proposal has been sent to the client.
+            </p>
+
+        </div>
+
+
+        <div class="proposal-layout">
+
+
+            <!-- PROJECT -->
+
+            <section class="project-card"
+                     id="projectCard">
+
+                Loading project...
+
+            </section>
+
+
+            <!-- FORM -->
+
+            <section class="form-card">
+
+                <h2>
+                    Submit Your Proposal
+                </h2>
+
+                <p>
+                    Tell the client why you are the right
+                    freelancer for this project.
+                </p>
+
+
+                <form id="proposalForm">
+
+
+                    <div class="form-group">
+
+                        <label for="proposedBudget">
+                            Proposed Budget (₹)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="proposedBudget"
+                            min="1"
+                            placeholder="Example: 22000"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="deliveryTime">
+                            Delivery Time (Days)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="deliveryTime"
+                            min="1"
+                            placeholder="Example: 15"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="coverLetter">
+                            Cover Letter
+                        </label>
+
+                        <textarea
+                            id="coverLetter"
+                            placeholder="Explain your experience and how you will complete this project..."
+                            required></textarea>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="submit-btn">
+
+                        Submit Proposal →
+
+                    </button>
+
+
+                </form>
+
+            </section>
+
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<footer class="footer">
+
+    <div class="footer-bottom">
+
+        © 2026 FreelanceHub. All rights reserved.
+
+    </div>
+
+</footer>
+
+
+<script>
+
+
+/* =====================================================
+   SELECTED PROJECT
+===================================================== */
+
+const selectedProjectId =
+    Number(
+        localStorage.getItem(
+            "selectedProject"
+        )
+    );
+
+
+/* =====================================================
+   LOAD PROJECT
+===================================================== */
+
+function loadProject() {
+
+    const projects =
+        JSON.parse(
+            localStorage.getItem(
+                "projects"
+            )
+        ) || [];
+
+
+    const project =
+        projects.find(
+            function(item) {
+
+                return item.id === selectedProjectId;
+
+            }
+        );
+
+
+    const projectCard =
+        document.getElementById(
+            "projectCard"
+        );
+
+
+    if (!project) {
+
+        projectCard.innerHTML = `
+
+            <h2>
+                Project Not Found
+            </h2>
+
+            <p>
+                Please go back and select a project.
+            </p>
+
+        `;
+
+        document.getElementById(
+            "proposalForm"
+        ).style.display = "none";
+
+        return;
+
+    }
+
+
+    projectCard.innerHTML = `
+
+        <span class="project-badge">
+
+            ${escapeHTML(
+                project.category ||
+                "Web Development"
+            )}
+
+        </span>
+
+
+        <h1>
+
+            ${escapeHTML(
+                project.title ||
+                "Untitled Project"
+            )}
+
+        </h1>
+
+
+        <p class="project-description">
+
+            ${escapeHTML(
+                project.description ||
+                "No description available."
+            )}
+
+        </p>
+
+
+        <div class="project-details">
+
+
+            <div class="detail-box">
+
+                <span>
+                    Budget
+                </span>
+
+                <strong>
+
+                    ₹${Number(
+                        project.budget || 0
+                    ).toLocaleString("en-IN")}
+
+                </strong>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <span>
+                    Deadline
+                </span>
+
+                <strong>
+
+                    ${escapeHTML(
+                        project.deadline || "-"
+                    )}
+
+                </strong>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <span>
+                    Project Type
+                </span>
+
+                <strong>
+
+                    ${escapeHTML(
+                        project.projectType ||
+                        "Fixed Price"
+                    )}
+
+                </strong>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <span>
+                    Skills
+                </span>
+
+                <strong>
+
+                    ${escapeHTML(
+                        project.skills ||
+                        "Not specified"
+                    )}
+
+                </strong>
+
+            </div>
+
+
+        </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+   GET CURRENT FREELANCER
+===================================================== */
+
+function getCurrentFreelancer() {
+
+    const currentUser =
+        JSON.parse(
+            localStorage.getItem(
+                "currentUser"
+            )
+        ) || {};
+
+
+    /*
+       Check different possible name fields.
+    */
+
+    const freelancerName =
+        currentUser.name ||
+        currentUser.fullName ||
+        currentUser.full_name ||
+        currentUser.username ||
+        "Freelancer";
+
+
+    const freelancerEmail =
+        currentUser.email ||
+        currentUser.emailAddress ||
+        "";
+
+
+    return {
+
+        name: freelancerName,
+
+        email: freelancerEmail
+
+    };
+
+}
+
+
+/* =====================================================
+   SUBMIT PROPOSAL
+===================================================== */
+
+document
+    .getElementById("proposalForm")
+    .addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+
+            /* =========================
+               PROJECTS
+            ========================= */
+
+            let projects =
+                JSON.parse(
+                    localStorage.getItem(
+                        "projects"
+                    )
+                ) || [];
+
+
+            const project =
+                projects.find(
+                    function(item) {
+
+                        return item.id === selectedProjectId;
+
+                    }
+                );
+
+
+            if (!project) {
+
+                alert(
+                    "Project not found."
+                );
+
+                return;
+
+            }
+
+
+            /* =========================
+               CURRENT FREELANCER
+            ========================= */
+
+            const freelancer =
+                getCurrentFreelancer();
+
+
+            /* =========================
+               FORM VALUES
+            ========================= */
+
+            const proposedBudget =
+                Number(
+                    document.getElementById(
+                        "proposedBudget"
+                    ).value
+                );
+
+
+            const deliveryTime =
+                Number(
+                    document.getElementById(
+                        "deliveryTime"
+                    ).value
+                );
+
+
+            const coverLetter =
+                document.getElementById(
+                    "coverLetter"
+                ).value.trim();
+
+
+            /* =========================
+               VALIDATION
+            ========================= */
+
+            if (
+                proposedBudget <= 0 ||
+                deliveryTime <= 0 ||
+                coverLetter === ""
+            ) {
+
+                alert(
+                    "Please enter valid proposal details."
+                );
+
+                return;
+
+            }
+
+
+            /* =========================
+               EXISTING PROPOSALS
+            ========================= */
+
+            let proposals =
+                JSON.parse(
+                    localStorage.getItem(
+                        "proposals"
+                    )
+                ) || [];
+
+
+            /* =========================
+               DUPLICATE CHECK
+            ========================= */
+
+            if (freelancer.email !== "") {
+
+                const alreadySubmitted =
+                    proposals.some(
+                        function(proposal) {
+
+                            return (
+                                proposal.projectId === selectedProjectId &&
+                                proposal.freelancerEmail === freelancer.email
+                            );
+
+                        }
+                    );
+
+
+                if (alreadySubmitted) {
+
+                    alert(
+                        "You have already submitted a proposal for this project."
+                    );
+
+                    return;
+
+                }
+
+            }
+
+
+            /* =========================
+               CREATE PROPOSAL
+            ========================= */
+
+            const proposal = {
+
+                id: Date.now(),
+
+                projectId:
+                    selectedProjectId,
+
+                projectTitle:
+                    project.title,
+
+                freelancerName:
+                    freelancer.name,
+
+                freelancerEmail:
+                    freelancer.email,
+
+                proposedBudget:
+                    proposedBudget,
+
+                deliveryTime:
+                    deliveryTime,
+
+                coverLetter:
+                    coverLetter,
+
+                status:
+                    "Pending",
+
+                submittedAt:
+                    new Date()
+                        .toLocaleDateString()
+
+            };
+
+
+            /* =========================
+               SAVE PROPOSAL
+            ========================= */
+
+            proposals.push(
+                proposal
+            );
+
+
+            localStorage.setItem(
+                "proposals",
+                JSON.stringify(
+                    proposals
+                )
+            );
+
+
+            /* =========================
+               UPDATE PROJECT COUNT
+            ========================= */
+
+            project.proposals =
+                proposals.filter(
+                    function(item) {
+
+                        return (
+                            item.projectId ===
+                            selectedProjectId
+                        );
+
+                    }
+                ).length;
+
+
+            if (
+                project.status !== "Assigned"
+            ) {
+
+                project.status =
+                    "Open";
+
+            }
+
+
+            /* =========================
+               SAVE PROJECT
+            ========================= */
+
+            localStorage.setItem(
+                "projects",
+                JSON.stringify(
+                    projects
+                )
+            );
+
+
+            /* =========================
+               SUCCESS
+            ========================= */
+
+            document.getElementById(
+                "successBox"
+            ).style.display =
+                "block";
+
+
+            document.getElementById(
+                "proposalForm"
+            ).style.display =
+                "none";
+
+
+            window.scrollTo({
+
+                top: 0,
+
+                behavior: "smooth"
+
+            });
+
+        }
+    );
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(value) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+    div.textContent =
+        String(value);
+
+    return div.innerHTML;
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+loadProject();
+
+</script>
+
+
+</body>
+
+</html>

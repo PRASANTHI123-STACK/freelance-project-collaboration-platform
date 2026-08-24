@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Login - FreelanceHub</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+
+        body {
+            background: #f4f7fb;
+            color: #222;
+            min-height: 100vh;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        nav {
+            background: #1e3a8a;
+
+            padding: 18px 50px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+
+        nav h2 {
+            color: white;
+        }
+
+
+        nav a {
+            color: white;
+
+            text-decoration: none;
+
+            margin-left: 25px;
+
+            font-size: 14px;
+        }
+
+
+        nav a:hover {
+            color: #bfdbfe;
+        }
+
+
+        /* ================= LOGIN ================= */
+
+        .login-container {
+
+            max-width: 450px;
+
+            margin: 70px auto;
+
+            padding: 35px;
+
+            background: white;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(0, 0, 0, 0.08);
+
+        }
+
+
+        .login-container h1 {
+
+            text-align: center;
+
+            color: #1e3a8a;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .login-container > p {
+
+            text-align: center;
+
+            color: #666;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        label {
+
+            display: block;
+
+            font-weight: bold;
+
+            margin-top: 15px;
+
+            margin-bottom: 6px;
+
+        }
+
+
+        input {
+
+            width: 100%;
+
+            padding: 13px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 7px;
+
+            font-size: 14px;
+
+        }
+
+
+        input:focus {
+
+            outline: none;
+
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(37, 99, 235, 0.1);
+
+        }
+
+
+        button {
+
+            width: 100%;
+
+            padding: 13px;
+
+            margin-top: 25px;
+
+            background: #2563eb;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+        }
+
+
+        button:hover {
+
+            background: #1d4ed8;
+
+        }
+
+
+        /* ================= MESSAGE ================= */
+
+        .message {
+
+            display: none;
+
+            margin-top: 18px;
+
+            padding: 12px;
+
+            border-radius: 7px;
+
+            text-align: center;
+
+            font-size: 14px;
+
+        }
+
+
+        .error {
+
+            background: #fee2e2;
+
+            color: #b91c1c;
+
+        }
+
+
+        .success {
+
+            background: #dcfce7;
+
+            color: #166534;
+
+        }
+
+
+        /* ================= LINKS ================= */
+
+        .links {
+
+            text-align: center;
+
+            margin-top: 25px;
+
+        }
+
+
+        .links p {
+
+            margin: 10px 0;
+
+            color: #666;
+
+        }
+
+
+        .links a {
+
+            color: #2563eb;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+        }
+
+
+        .links a:hover {
+
+            text-decoration: underline;
+
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+
+            background: #1e3a8a;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 20px;
+
+            margin-top: 100px;
+
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 600px) {
+
+            nav {
+
+                padding: 15px 20px;
+
+            }
+
+
+            nav div {
+
+                display: none;
+
+            }
+
+
+            .login-container {
+
+                margin: 40px 20px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVIGATION ================= -->
+
+<nav>
+
+    <h2>
+        FreelanceHub
+    </h2>
+
+
+    <div>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="register.html">
+            Register
+        </a>
+
+        <a href="login.html">
+            Login
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= LOGIN FORM ================= -->
+
+<div class="login-container">
+
+
+    <h1>
+        Welcome Back
+    </h1>
+
+
+    <p>
+        Login to your FreelanceHub account
+    </p>
+
+
+    <form
+        onsubmit="loginUser(event)">
+
+
+        <label for="loginEmail">
+            Email
+        </label>
+
+
+        <input
+            type="email"
+            id="loginEmail"
+            placeholder="Enter your email"
+            required>
+
+
+        <label for="loginPassword">
+            Password
+        </label>
+
+
+        <input
+            type="password"
+            id="loginPassword"
+            placeholder="Enter your password"
+            required>
+
+
+        <button type="submit">
+            Login
+        </button>
+
+
+    </form>
+
+
+    <div
+        id="message"
+        class="message">
+    </div>
+
+
+    <div class="links">
+
+
+        <p>
+
+            Don't have an account?
+
+            <a href="register.html">
+                Register
+            </a>
+
+        </p>
+
+
+        <p>
+
+            <a
+                href="#"
+                onclick="forgotPassword()">
+
+                Forgot Password?
+
+            </a>
+
+        </p>
+
+
+    </div>
+
+
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <p>
+        © 2026 Freelance Project Collaboration Platform
+    </p>
+
+</footer>
+
+
+<script>
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+function loginUser(event) {
+
+    event.preventDefault();
+
+
+    const email =
+        document
+            .getElementById("loginEmail")
+            .value
+            .trim()
+            .toLowerCase();
+
+
+    const password =
+        document
+            .getElementById("loginPassword")
+            .value;
+
+
+    const message =
+        document.getElementById(
+            "message"
+        );
+
+
+    /*
+       Get registered users.
+
+       We support several possible localStorage
+       names so this works with your existing
+       project data.
+    */
+
+
+    let allUsers = [];
+
+
+    /* =========================
+       users
+    ========================= */
+
+    const users =
+        JSON.parse(
+            localStorage.getItem(
+                "users"
+            )
+        ) || [];
+
+
+    if (Array.isArray(users)) {
+
+        allUsers =
+            allUsers.concat(users);
+
+    }
+
+
+    /* =========================
+       registeredUsers
+    ========================= */
+
+    const registeredUsers =
+        JSON.parse(
+            localStorage.getItem(
+                "registeredUsers"
+            )
+        ) || [];
+
+
+    if (
+        Array.isArray(
+            registeredUsers
+        )
+    ) {
+
+        allUsers =
+            allUsers.concat(
+                registeredUsers
+            );
+
+    }
+
+
+    /* =========================
+       clients
+    ========================= */
+
+    const clients =
+        JSON.parse(
+            localStorage.getItem(
+                "clients"
+            )
+        ) || [];
+
+
+    if (Array.isArray(clients)) {
+
+        allUsers =
+            allUsers.concat(
+
+                clients.map(
+                    function(user) {
+
+                        return {
+                            ...user,
+                            role:
+                                user.role ||
+                                "client"
+                        };
+
+                    }
+                )
+
+            );
+
+    }
+
+
+    /* =========================
+       freelancers
+    ========================= */
+
+    const freelancers =
+        JSON.parse(
+            localStorage.getItem(
+                "freelancers"
+            )
+        ) || [];
+
+
+    if (
+        Array.isArray(
+            freelancers
+        )
+    ) {
+
+        allUsers =
+            allUsers.concat(
+
+                freelancers.map(
+                    function(user) {
+
+                        return {
+                            ...user,
+                            role:
+                                user.role ||
+                                "freelancer"
+                        };
+
+                    }
+                )
+
+            );
+
+    }
+
+
+    /* =========================
+       FIND USER
+    ========================= */
+
+    const user =
+        allUsers.find(
+            function(item) {
+
+                const itemEmail =
+                    String(
+                        item.email ||
+                        item.emailAddress ||
+                        ""
+                    )
+                    .trim()
+                    .toLowerCase();
+
+
+                const itemPassword =
+                    String(
+                        item.password ||
+                        ""
+                    );
+
+
+                return (
+                    itemEmail === email &&
+                    itemPassword === password
+                );
+
+            }
+        );
+
+
+    /* =========================
+       LOGIN FAILED
+    ========================= */
+
+    if (!user) {
+
+        message.style.display =
+            "block";
+
+        message.className =
+            "message error";
+
+        message.textContent =
+            "Invalid email or password.";
+
+        return;
+
+    }
+
+
+    /* =================================================
+       DETERMINE ROLE
+    ================================================= */
+
+    let role =
+        String(
+            user.role ||
+            user.userType ||
+            user.type ||
+            ""
+        )
+        .toLowerCase();
+
+
+    /*
+       If role isn't stored,
+       check whether user exists in
+       clients/freelancers.
+    */
+
+    if (!role) {
+
+        const freelancerExists =
+            freelancers.some(
+                function(item) {
+
+                    return (
+                        String(
+                            item.email ||
+                            ""
+                        )
+                        .trim()
+                        .toLowerCase() ===
+                        email
+                    );
+
+                }
+            );
+
+
+        const clientExists =
+            clients.some(
+                function(item) {
+
+                    return (
+                        String(
+                            item.email ||
+                            ""
+                        )
+                        .trim()
+                        .toLowerCase() ===
+                        email
+                    );
+
+                }
+            );
+
+
+        if (freelancerExists) {
+
+            role =
+                "freelancer";
+
+        }
+        else if (clientExists) {
+
+            role =
+                "client";
+
+        }
+
+    }
+
+
+    /* =================================================
+       NORMALIZE USER
+    ================================================= */
+
+    const currentUser = {
+
+        id:
+            user.id ||
+            Date.now(),
+
+        name:
+            user.name ||
+            user.fullName ||
+            user.full_name ||
+            user.username ||
+            "User",
+
+        email:
+            user.email ||
+            user.emailAddress ||
+            email,
+
+        password:
+            user.password ||
+            password,
+
+        role:
+            role || "freelancer",
+
+        skills:
+            user.skills ||
+            "",
+
+        phone:
+            user.phone ||
+            "",
+
+        bio:
+            user.bio ||
+            ""
+
+    };
+
+
+    /* =================================================
+       SAVE CURRENT USER
+    ================================================= */
+
+    localStorage.setItem(
+        "currentUser",
+        JSON.stringify(
+            currentUser
+        )
+    );
+
+
+    /* =================================================
+       SUCCESS MESSAGE
+    ================================================= */
+
+    message.style.display =
+        "block";
+
+    message.className =
+        "message success";
+
+    message.textContent =
+        "Login successful! Redirecting...";
+
+
+    /* =================================================
+       REDIRECT
+    ================================================= */
+
+    setTimeout(
+        function() {
+
+            if (
+                currentUser.role
+                    .includes("client")
+            ) {
+
+                window.location.href =
+                    "client-dashboard.html";
+
+            }
+            else {
+
+                window.location.href =
+                    "freelancer-dashboard.html";
+
+            }
+
+        },
+        700
+    );
+
+}
+
+
+/* =====================================================
+   FORGOT PASSWORD
+===================================================== */
+
+function forgotPassword() {
+
+    alert(
+        "Password reset functionality will be available soon."
+    );
+
+}
+
+</script>
+
+
+</body>
+
+</html>

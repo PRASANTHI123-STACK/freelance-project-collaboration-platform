@@ -1,127 +1,616 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Freelance Project Collaboration Platform</title>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>FreelanceHub - Find Freelance Talent</title>
+
+    <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <a href="index.html" class="logo">
+        Freelance<span>Hub</span>
+    </a>
+
+    <ul class="nav-links">
+
+        <li>
+            <a href="index.html">Home</a>
+        </li>
+
+        <li>
+            <a href="#categories">Categories</a>
+        </li>
+
+        <li>
+            <a href="#projects">Projects</a>
+        </li>
+
+        <li>
+            <a href="#how-it-works">How It Works</a>
+        </li>
+
+    </ul>
+
+    <div class="nav-buttons">
+
+        <a href="login.html" class="btn-login">
+            Login
+        </a>
+
+        <a href="register.html" class="btn-register">
+            Get Started
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+
+        <div>
+
+            <span class="hero-badge">
+                🚀 The future of freelance collaboration
+            </span>
+
+            <h1>
+                Find the right
+                <span>talent</span>
+                for your next project.
+            </h1>
+
+            <p class="hero-description">
+
+                FreelanceHub connects clients with skilled
+                freelancers to build, collaborate and deliver
+                amazing projects.
+
+            </p>
+
+
+            <div class="hero-buttons">
+
+                <a href="post-project.html"
+                   class="primary-btn">
+
+                    Post a Project
+
+                </a>
+
+                <a href="#projects"
+                   class="secondary-btn">
+
+                    Browse Projects
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- Hero project preview -->
+
+        <div class="hero-card">
+
+            <div class="hero-card-header">
+
+                <h3>Featured Project</h3>
+
+                <span class="status">
+                    Open
+                </span>
+
+            </div>
+
+
+            <div class="project-preview">
+
+                <h4>
+                    E-Commerce Website Development
+                </h4>
+
+                <p>
+                    Looking for an experienced developer
+                    to build a modern e-commerce platform.
+                </p>
+
+                <div class="project-bottom">
+
+                    <span>
+                        💻 Web Development
+                    </span>
+
+                    <span class="price">
+                        ₹35,000
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="project-preview">
+
+                <h4>
+                    Mobile App UI/UX Design
+                </h4>
+
+                <p>
+                    Design a clean and modern mobile
+                    application interface.
+                </p>
+
+                <div class="project-bottom">
+
+                    <span>
+                        🎨 UI/UX Design
+                    </span>
+
+                    <span class="price">
+                        ₹20,000
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= STATS ================= -->
+
+<section class="stats">
+
+    <div class="stats-container">
+
+        <div class="stat">
+
+            <h2>10K+</h2>
+
+            <p>
+                Freelancers
+            </p>
+
+        </div>
+
+
+        <div class="stat">
+
+            <h2>5K+</h2>
+
+            <p>
+                Projects Posted
+            </p>
+
+        </div>
+
+
+        <div class="stat">
+
+            <h2>98%</h2>
+
+            <p>
+                Successful Projects
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CATEGORIES ================= -->
+
+<section class="section" id="categories">
+
+    <div class="section-header">
+
+        <h2>
+            Popular Categories
+        </h2>
+
+        <p>
+            Explore talented professionals across
+            different categories.
+        </p>
+
+    </div>
+
+
+    <div class="categories">
+
+
+        <div class="category-card">
+
+            <div class="category-icon">
+                💻
+            </div>
+
+            <h3>
+                Web Development
+            </h3>
+
+            <p>
+                Frontend, backend and full-stack
+                development.
+            </p>
+
+        </div>
+
+
+        <div class="category-card">
+
+            <div class="category-icon">
+                🎨
+            </div>
+
+            <h3>
+                UI/UX Design
+            </h3>
+
+            <p>
+                Modern interfaces and user experiences.
+            </p>
+
+        </div>
+
+
+        <div class="category-card">
+
+            <div class="category-icon">
+                📱
+            </div>
+
+            <h3>
+                Mobile Development
+            </h3>
+
+            <p>
+                Android and iOS application development.
+            </p>
+
+        </div>
+
+
+        <div class="category-card">
+
+            <div class="category-icon">
+                📊
+            </div>
+
+            <h3>
+                Data Science
+            </h3>
+
+            <p>
+                Data analytics, AI and machine learning.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= HOW IT WORKS ================= -->
+
+<section class="section"
+         id="how-it-works"
+         style="background:#f1f5f9;">
+
+    <div class="section-header">
+
+        <h2>
+            How FreelanceHub Works
+        </h2>
+
+        <p>
+            A simple process for successful collaboration.
+        </p>
+
+    </div>
+
+
+    <div class="steps">
+
+
+        <div class="step">
+
+            <div class="step-number">
+                01
+            </div>
+
+            <h3>
+                Post Your Project
+            </h3>
+
+            <p>
+                Tell freelancers what you need,
+                your budget and project deadline.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                02
+            </div>
+
+            <h3>
+                Receive Proposals
+            </h3>
+
+            <p>
+                Skilled freelancers review your
+                project and submit proposals.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                03
+            </div>
+
+            <h3>
+                Start Collaborating
+            </h3>
+
+            <p>
+                Select the right freelancer and
+                start working together.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PROJECTS ================= -->
+
+<section class="section" id="projects">
+
+    <div class="section-header">
+
+        <h2>
+            Featured Projects
+        </h2>
+
+        <p>
+            Discover opportunities from clients.
+        </p>
+
+    </div>
+
+
+    <div class="projects">
+
+
+        <div class="project-card">
+
+            <span class="project-tag">
+                WEB DEVELOPMENT
+            </span>
+
+            <h3>
+                Business Website
+            </h3>
+
+            <p>
+                Build a responsive website for
+                a growing business.
+            </p>
+
+            <div class="project-info">
+
+                <strong>
+                    ₹25,000
+                </strong>
+
+                <span>
+                    12 Proposals
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="project-card">
+
+            <span class="project-tag">
+                UI/UX DESIGN
+            </span>
+
+            <h3>
+                Mobile App Design
+            </h3>
+
+            <p>
+                Create a modern UI/UX design
+                for a mobile application.
+            </p>
+
+            <div class="project-info">
+
+                <strong>
+                    ₹40,000
+                </strong>
+
+                <span>
+                    8 Proposals
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="project-card">
+
+            <span class="project-tag">
+                DATA SCIENCE
+            </span>
+
+            <h3>
+                Sales Analytics Dashboard
+            </h3>
+
+            <p>
+                Develop an analytics dashboard
+                for business reporting.
+            </p>
+
+            <div class="project-info">
+
+                <strong>
+                    ₹30,000
+                </strong>
+
+                <span>
+                    15 Proposals
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CTA ================= -->
+
+<section class="cta">
+
+    <h2>
+        Ready to start your next project?
+    </h2>
+
     <p>
-    Freelance Project Collaboration Platform connects clients and
-    freelancers for project collaboration and management.
-</p>
+        Connect with skilled freelancers and
+        bring your ideas to life.
+    </p>
 
-    <h1>Freelance Project Collaboration Platform</h1>
+    <a href="post-project.html"
+       class="secondary-btn">
 
-    <h2>User Authentication</h2>
+        Post Your Project
 
-    <button>Client Registration</button>
-    <button>Freelancer Registration</button>
-    <button>User Login</button>
+    </a>
 
-    <h2>Project Management</h2>
+</section>
 
-    <button>Post Project</button>
-    <button>Browse Projects</button>
-    <h2>Client Registration</h2>
 
-<form>
-    <label>Full Name:</label>
-    <input type="text" name="name" required>
-    <br><br>
+<!-- ================= FOOTER ================= -->
 
-    <label>Email:</label>
-    <input type="email" name="email" required>
-    <br><br>
+<footer class="footer">
 
-    <label>Password:</label>
-    <input type="password" name="password" required>
-    <br><br>
+    <div class="footer-container">
 
-    <button type="submit">Register</button>
-</form>
-<h2>Freelancer Registration</h2>
 
-<form>
-    <label>Full Name:</label>
-    <input type="text" name="freelancer-name" required>
-    <br><br>
+        <div>
 
-    <label>Email:</label>
-    <input type="email" name="freelancer-email" required>
-    <br><br>
+            <h3>
+                FreelanceHub
+            </h3>
 
-    <label>Password:</label>
-    <input type="password" name="freelancer-password" required>
-    <br><br>
+            <p>
+                A collaborative platform connecting
+                clients and freelancers for successful
+                project delivery.
+            </p>
 
-    <label>Skills:</label>
-    <input type="text" name="skills" required>
-    <br><br>
+        </div>
 
-    <button type="submit">Register as Freelancer</button>
-</form>
-<h2>User Login</h2>
 
-<form>
-    <label>Email:</label>
-    <input type="email" name="login-email" required>
-    <br><br>
+        <div>
 
-    <label>Password:</label>
-    <input type="password" name="login-password" required>
-    <br><br>
+            <h3>
+                Platform
+            </h3>
 
-    <button type="submit">Login</button>
-</form>
-<h2>Manage Profile</h2>
+            <a href="index.html">
+                Home
+            </a>
 
-<form>
-    <label>Full Name:</label>
-    <input type="text" name="profile-name" required>
-    <br><br>
+            <a href="#projects">
+                Projects
+            </a>
 
-    <label>Email:</label>
-    <input type="email" name="profile-email" required>
-    <br><br>
+            <a href="#categories">
+                Categories
+            </a>
 
-    <label>Phone:</label>
-    <input type="tel" name="profile-phone" required>
-    <br><br>
+        </div>
 
-    <label>Skills:</label>
-    <input type="text" name="profile-skills">
-    <br><br>
 
-    <label>Bio:</label>
-    <textarea name="profile-bio"></textarea>
-    <br><br>
+        <div>
 
-    <button type="submit">Update Profile</button>
-</form>
-<h2>Post Project</h2>
+            <h3>
+                Account
+            </h3>
 
-<form>
-    <label>Project Title:</label>
-    <input type="text" name="project-title" required>
-    <br><br>
+            <a href="login.html">
+                Login
+            </a>
 
-    <label>Project Description:</label>
-    <textarea name="project-description" required></textarea>
-    <br><br>
+            <a href="register.html">
+                Register
+            </a>
 
-    <label>Budget:</label>
-    <input type="number" name="budget" required>
-    <br><br>
+            <a href="profile.html">
+                Manage Profile
+            </a>
 
-    <label>Deadline:</label>
-    <input type="date" name="deadline" required>
-    <br><br>
+        </div>
 
-    <button type="submit">Post Project</button>
-</form>
+    </div>
+
+
+    <div class="footer-bottom">
+
+        © 2026 FreelanceHub. All rights reserved.
+
+    </div>
+
+</footer>
 
 
 </body>
+
 </html>
