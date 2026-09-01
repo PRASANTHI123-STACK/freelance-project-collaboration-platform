@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Chat - FreelanceHub</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        .chat-page {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .chat-header {
+            background: white;
+            padding: 25px;
+            border-radius: 12px 12px 0 0;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        .chat-header h1 {
+            margin-bottom: 8px;
+        }
+
+        .chat-header p {
+            color: #666;
+        }
+
+        .chat-container {
+            background: white;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        .chat-messages {
+            height: 450px;
+            overflow-y: auto;
+            padding: 25px;
+            background: #f7f9fc;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 12px;
+        }
+
+        .message-user {
+            margin-left: auto;
+            background: #2563eb;
+            color: white;
+        }
+
+        .message-other {
+            background: white;
+            border: 1px solid #ddd;
+        }
+
+        .message small {
+            display: block;
+            margin-top: 5px;
+            font-size: 11px;
+            opacity: 0.7;
+        }
+
+        .chat-input-area {
+            display: flex;
+            gap: 10px;
+            padding: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            padding: 13px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        .chat-input-area button {
+            padding: 13px 25px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .chat-input-area button:hover {
+            background: #1d4ed8;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: #2563eb;
+            font-weight: bold;
+        }
+
+        .empty-chat {
+            text-align: center;
+            color: #777;
+            padding: 100px 20px;
+        }
+
+        @media (max-width: 600px) {
+
+            .chat-page {
+                margin: 20px auto;
+            }
+
+            .message {
+                max-width: 85%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <a href="index.html" class="logo">
+        Freelance<span>Hub</span>
+    </a>
+
+    <ul class="nav-links">
+
+        <li>
+            <a href="client-dashboard.html">
+                Dashboard
+            </a>
+        </li>
+
+        <li>
+            <a href="projects.html">
+                My Projects
+            </a>
+        </li>
+
+        <li>
+            <a href="profile.html">
+                Profile
+            </a>
+        </li>
+
+    </ul>
+
+</header>
+
+
+<!-- ================= CHAT PAGE ================= -->
+
+<main class="chat-page">
+
+
+    <a href="javascript:history.back()" class="back-button">
+        ← Back
+    </a>
+
+
+    <div class="chat-header">
+
+        <h1>
+            💬 Project Chat
+        </h1>
+
+        <p id="projectName">
+            Loading project...
+        </p>
+
+    </div>
+
+
+    <div class="chat-container">
+
+
+        <!-- ================= MESSAGES ================= -->
+
+        <div
+            class="chat-messages"
+            id="chatMessages">
+
+            <div class="empty-chat" id="emptyChat">
+
+                <h3>
+                    No messages yet
+                </h3>
+
+                <p>
+                    Start the conversation with your client or freelancer.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= INPUT ================= -->
+
+        <div class="chat-input-area">
+
+            <input
+                type="text"
+                id="messageInput"
+                placeholder="Type your message..."
+                onkeypress="handleEnter(event)"
+            >
+
+            <button onclick="sendMessage()">
+                Send
+            </button>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+
+/* ==================================================
+   CURRENT USER
+   ================================================== */
+
+const currentUser =
+    JSON.parse(
+        localStorage.getItem("currentUser")
+    ) || null;
+
+
+/* ==================================================
+   SELECTED PROJECT
+   ================================================== */
+
+const selectedProjectId =
+    localStorage.getItem("selectedProject");
+
+
+/* ==================================================
+   LOAD PROJECT
+   ================================================== */
+
+function loadProject() {
+
+    const projects =
+        JSON.parse(
+            localStorage.getItem("projects")
+        ) || [];
+
+
+    const project =
+        projects.find(
+            function(item) {
+
+                return String(item.id) ===
+                       String(selectedProjectId);
+
+            }
+        );
+
+
+    if (project) {
+
+        document.getElementById("projectName").textContent =
+            "Project: " +
+            (project.title || "Untitled Project");
+
+    } else {
+
+        document.getElementById("projectName").textContent =
+            "Project Chat";
+
+    }
+
+}
+
+
+/* ==================================================
+   CHAT STORAGE KEY
+   ================================================== */
+
+function getChatKey() {
+
+    return "chat_" + selectedProjectId;
+
+}
+
+
+/* ==================================================
+   LOAD MESSAGES
+   ================================================== */
+
+function loadMessages() {
+
+    const messages =
+        JSON.parse(
+            localStorage.getItem(
+                getChatKey()
+            )
+        ) || [];
+
+
+    const chatMessages =
+        document.getElementById(
+            "chatMessages"
+        );
+
+
+    chatMessages.innerHTML = "";
+
+
+    if (messages.length === 0) {
+
+        chatMessages.innerHTML = `
+
+            <div class="empty-chat">
+
+                <h3>
+                    No messages yet
+                </h3>
+
+                <p>
+                    Start the conversation.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    messages.forEach(
+        function(message) {
+
+
+            const messageDiv =
+                document.createElement("div");
+
+
+            messageDiv.className =
+                "message " +
+                (
+                    message.email ===
+                    (currentUser ? currentUser.email : "")
+                    ?
+                    "message-user"
+                    :
+                    "message-other"
+                );
+
+
+            messageDiv.innerHTML = `
+
+                ${escapeHTML(message.text)}
+
+                <small>
+                    ${escapeHTML(message.name)}
+                    •
+                    ${message.time}
+                </small>
+
+            `;
+
+
+            chatMessages.appendChild(
+                messageDiv
+            );
+
+        }
+    );
+
+
+    chatMessages.scrollTop =
+        chatMessages.scrollHeight;
+
+}
+
+
+/* ==================================================
+   SEND MESSAGE
+   ================================================== */
+
+function sendMessage() {
+
+    const input =
+        document.getElementById(
+            "messageInput"
+        );
+
+
+    const text =
+        input.value.trim();
+
+
+    if (!text) {
+
+        return;
+
+    }
+
+
+    if (!currentUser) {
+
+        alert(
+            "Please login before using chat."
+        );
+
+        return;
+
+    }
+
+
+    let messages =
+        JSON.parse(
+            localStorage.getItem(
+                getChatKey()
+            )
+        ) || [];
+
+
+    const now =
+        new Date();
+
+
+    messages.push({
+
+        name:
+            currentUser.name ||
+            "User",
+
+        email:
+            currentUser.email,
+
+        role:
+            currentUser.role,
+
+        text:
+            text,
+
+        time:
+            now.toLocaleTimeString(
+                [],
+                {
+                    hour: "2-digit",
+                    minute: "2-digit"
+                }
+            )
+
+    });
+
+
+    localStorage.setItem(
+        getChatKey(),
+        JSON.stringify(messages)
+    );
+
+
+    input.value = "";
+
+
+    loadMessages();
+
+}
+
+
+/* ==================================================
+   ENTER KEY
+   ================================================== */
+
+function handleEnter(event) {
+
+    if (event.key === "Enter") {
+
+        sendMessage();
+
+    }
+
+}
+
+
+/* ==================================================
+   SECURITY
+   ================================================== */
+
+function escapeHTML(text) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent =
+        text;
+
+    return div.innerHTML;
+
+}
+
+
+/* ==================================================
+   START
+   ================================================== */
+
+loadProject();
+
+loadMessages();
+
+
+</script>
+
+
+</body>
+
+</html>

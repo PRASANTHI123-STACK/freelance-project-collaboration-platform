@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -122,6 +123,8 @@
             border-radius: 10px;
         }
 
+        /* ACTION SECTION */
+
         .action-section {
             margin-top: 30px;
             display: flex;
@@ -137,6 +140,13 @@
             margin: 0;
         }
 
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
         .proposal-btn {
             border: none;
             background: #2563eb;
@@ -150,6 +160,23 @@
 
         .proposal-btn:hover {
             background: #1d4ed8;
+        }
+
+        /* VIDEO CALL BUTTON */
+
+        .video-call-btn {
+            border: none;
+            background: #16a34a;
+            color: white;
+            padding: 13px 25px;
+            border-radius: 9px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .video-call-btn:hover {
+            background: #15803d;
         }
 
         .not-found {
@@ -198,6 +225,16 @@
 
             .project-details-card {
                 padding: 25px;
+            }
+
+            .action-buttons {
+                width: 100%;
+                flex-direction: column;
+            }
+
+            .proposal-btn,
+            .video-call-btn {
+                width: 100%;
             }
 
         }
@@ -269,7 +306,9 @@
 
 
         <div id="projectContainer">
+
             <!-- Project will be loaded here -->
+
         </div>
 
     </div>
@@ -291,6 +330,11 @@
 
 
 <script>
+
+
+/* =========================================================
+   LOAD PROJECT DETAILS
+========================================================= */
 
 function loadProjectDetails() {
 
@@ -317,6 +361,10 @@ function loadProjectDetails() {
             "projectContainer"
         );
 
+
+    /* =====================================================
+       PROJECT NOT FOUND
+    ===================================================== */
 
     if (!project) {
 
@@ -349,54 +397,83 @@ function loadProjectDetails() {
     }
 
 
+    /* =====================================================
+       PROJECT DETAILS
+    ===================================================== */
+
     container.innerHTML = `
 
         <div class="project-details-card">
+
+
+            <!-- TOP -->
 
             <div class="details-top">
 
                 <div>
 
                     <span class="category-tag">
+
                         ${project.category}
+
                     </span>
 
+
                     <h1>
+
                         ${project.title}
+
                     </h1>
 
                 </div>
 
+
                 <span class="status-tag">
+
                     ${project.status}
+
                 </span>
 
             </div>
 
 
+            <!-- DESCRIPTION -->
+
             <div class="description">
 
                 <strong>
+
                     Project Description
+
                 </strong>
 
+
                 <p>
+
                     ${project.description}
+
                 </p>
 
             </div>
 
 
+            <!-- PROJECT INFORMATION -->
+
             <div class="info-grid">
 
+
                 <div class="info-box">
 
                     <span>
+
                         Budget
+
                     </span>
 
                     <strong>
+
                         ₹${project.budget}
+
                     </strong>
 
                 </div>
@@ -405,11 +482,15 @@ function loadProjectDetails() {
                 <div class="info-box">
 
                     <span>
+
                         Deadline
+
                     </span>
 
                     <strong>
+
                         ${project.deadline}
+
                     </strong>
 
                 </div>
@@ -418,11 +499,15 @@ function loadProjectDetails() {
                 <div class="info-box">
 
                     <span>
+
                         Project Type
+
                     </span>
 
                     <strong>
+
                         ${project.projectType}
+
                     </strong>
 
                 </div>
@@ -431,48 +516,87 @@ function loadProjectDetails() {
                 <div class="info-box">
 
                     <span>
+
                         Experience
+
                     </span>
 
                     <strong>
+
                         ${project.experience}
+
                     </strong>
 
                 </div>
+
 
             </div>
 
+
+            <!-- SKILLS -->
 
             <div class="skills-section">
 
                 <h2>
+
                     Skills Required
+
                 </h2>
 
+
                 <div class="skills-text">
+
                     ${project.skills}
+
                 </div>
 
             </div>
 
 
+            <!-- ACTIONS -->
+
             <div class="action-section">
 
+
                 <p>
+
                     Interested in this project?
-                    Submit a proposal to the client.
+                    Submit a proposal or discuss
+                    the project through a video call.
+
                 </p>
 
 
-                <button
-                    class="proposal-btn"
-                    onclick="submitProposal(${project.id})">
+                <div class="action-buttons">
 
-                    Submit Proposal →
 
-                </button>
+                    <!-- SUBMIT PROPOSAL -->
+
+                    <button
+                        class="proposal-btn"
+                        onclick="submitProposal(${project.id})">
+
+                        Submit Proposal →
+
+                    </button>
+
+
+                    <!-- VIDEO CALL -->
+
+                    <button
+                        class="video-call-btn"
+                        onclick="startVideoCall(${project.id})">
+
+                        🎥 Video Call
+
+                    </button>
+
+
+                </div>
+
 
             </div>
+
 
         </div>
 
@@ -481,6 +605,10 @@ function loadProjectDetails() {
 }
 
 
+/* =========================================================
+   SUBMIT PROPOSAL
+========================================================= */
+
 function submitProposal(id) {
 
     localStorage.setItem(
@@ -488,13 +616,67 @@ function submitProposal(id) {
         id
     );
 
+
     window.location.href =
         "submit-proposal.html";
 
 }
 
 
+/* =========================================================
+   START VIDEO CALL
+========================================================= */
+
+function startVideoCall(projectId) {
+
+    /*
+       Save the project ID so the video-call page
+       knows which project the call belongs to.
+    */
+
+    localStorage.setItem(
+        "videoCallProject",
+        projectId
+    );
+
+
+    /*
+       Create a unique room for this project.
+
+       Example:
+
+       Project ID 101
+       ↓
+       project-101
+
+       Project ID 102
+       ↓
+       project-102
+    */
+
+    const roomId =
+        "project-" +
+        projectId;
+
+
+    /*
+       Open the video-call page
+       inside FreelanceHub.
+    */
+
+    window.location.href =
+        "video-call.html?room=" +
+        encodeURIComponent(roomId);
+
+}
+
+
+/* =========================================================
+   START PAGE
+========================================================= */
+
 loadProjectDetails();
+
 
 </script>
 

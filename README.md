@@ -1,174 +1,305 @@
 # Freelance Project Collaboration Platform
 
-## Project Description
+## 1. Project Description
 
-A collaborative platform that connects clients and freelancers for project
-posting, proposals, task management, progress tracking, file sharing,
-communication, and payment management.
+The Freelance Project Collaboration Platform is a web-based application designed to connect clients and freelancers and support project collaboration.
 
-## Planned Features
+Clients can register, log in, create projects, view freelancer proposals, review proposals, and accept a suitable freelancer.
 
-- Client Registration
-- Freelancer Registration
-- User Login
-- Manage Profile
-- Post Project
-- Browse Projects
-- Edit Project
-- Submit Proposal
-- Review Proposals
-- Accept Proposal
-- Create Tasks
-- Assign Tasks
-- View Assigned Tasks
-- Update Task Status
-- Monitor Progress
-- Update Progress
-- Track Milestones
-- Upload Deliverables
-- Download Files
-- Chat with Freelancer
-- Receive Notifications
-- Release Payment
-- Payment History
-- Generate Reports
-- Manage Users
+Freelancers can register, log in, manage their profile, browse available projects, view project details, submit proposals, and track their proposal status.
 
-## Tools
+The project is developed using a collaborative Git and GitHub workflow with feature branches, meaningful commits, Pull Requests, code reviews, and merging into the main branch.
 
-- Visual Studio Code
-- Git
-- Git Bash
-- GitHub
-## User Authentication
+---
 
-The platform supports secure user authentication for clients and freelancers.
+## 2. Project Objectives
 
-### Authentication Features
+The main objectives of the project are:
 
-- Client registration
-- Freelancer registration
-- User login
-- Profile management
-- Password reset
-## Post Project
+- Connect clients and freelancers through a single platform.
+- Allow clients to create and manage project requirements.
+- Allow freelancers to browse available projects.
+- Allow freelancers to submit proposals for projects.
+- Allow clients to view and review submitted proposals.
+- Allow clients to accept a suitable freelancer proposal.
+- Assign the project to the selected freelancer.
+- Provide separate workflows for clients and freelancers.
+- Provide role-based dashboards.
+- Follow a structured Git and GitHub collaboration workflow.
+- Deploy the application on an AWS EC2 Linux server as part of Sprint 5.
 
-The platform allows clients to create and publish projects for
-freelancers.
+---
 
-## Project Structure
+## 3. Current Features
 
-### Frontend
-The frontend contains the user interface for clients and freelancers.
+### User Registration
 
-### Backend
-The backend contains the server-side application logic.
+The platform provides separate registration options for clients and freelancers.
 
-### Documentation
-The `docs/` folder contains project and Git workflow documentation.
+#### Client Registration
 
-### Test Cases
-The `testcases/` folder contains test cases used to verify the implemented features.
-## Project Setup
+Clients can register by providing:
 
-### Prerequisites
+- Full Name
+- Email Address
+- Password
+- Confirm Password
 
-- Git
-- Python
-- Visual Studio Code
-- A web browser
+#### Freelancer Registration
 
-### Running the Project
+Freelancers can register by providing:
 
-1. Clone the repository.
-2. Open the project in Visual Studio Code.
-3. Open the `frontend/` folder.
-4. Open `index.html` in a web browser.
+- Full Name
+- Email Address
+- Password
+- Primary Skill
 
-The project uses Git and GitHub for collaborative development.
-## Git Collaboration Workflow
+### User Login
 
-The project follows a collaborative Git workflow.
+Registered users can log in using their email address and password.
 
-1. Create a feature branch.
-2. Implement the assigned feature.
-3. Commit the changes with a meaningful commit message.
-4. Push the feature branch to GitHub.
-5. Create a Pull Request.
-6. Request a teammate review.
-7. Get approval from the reviewer.
-8. Merge the Pull Request into the `main` branch.
+The platform supports two user roles:
 
-### Branching Strategy
+- Client
+- Freelancer
 
-The `main` branch contains stable and integrated code.
+After login, users can access the dashboard associated with their role.
 
-Feature development is performed using separate feature branches, such as:
+### Client Features
 
-- `feature/client-registration`
-- `feature/freelancer-registration`
-- `feature/user-login`
-- `feature/manage-profile`
-- `feature/post-project`
-## Commit Guidelines
+Clients can:
 
-The team uses meaningful commit messages that clearly describe the changes.
+- Register an account.
+- Log in to the platform.
+- Access the Client Dashboard.
+- Manage their profile.
+- Post new projects.
+- View posted projects.
+- View project details.
+- View freelancer proposals.
+- Review proposals.
+- Accept a freelancer proposal.
 
-Examples:
+### Freelancer Features
 
-- `Implement client registration form`
-- `Implement freelancer registration form`
-- `Implement user login form`
-- `Implement manage profile form`
-- `Implement post project form`
-- `Add Git collaboration workflow`
-- `Add project setup documentation`
-## Pull Request and Code Review
+Freelancers can:
 
-Each team member contributes using a feature branch and Pull Request.
+- Register an account.
+- Log in to the platform.
+- Access the Freelancer Dashboard.
+- Manage their profile.
+- Browse available projects.
+- View project details.
+- Submit proposals.
+- View submitted proposals.
+- Check proposal status.
+- View accepted project activity.
 
-The Pull Request process includes:
+### Project Features
 
-- Feature implementation
-- Description of changes
-- Related User Story
-- Testing performed
-- Teammate review
-- Approval
-- Merge into `main`
+Clients can create projects containing information such as:
 
-The project follows:
+- Project Title
+- Project Description
+- Budget
+- Deadline
+- Project Type
+- Required Skills
 
-**User Story → Feature Branch → Code Implementation → Meaningful Commit → Push → Pull Request → Code Review → Approval → Merge into main**
+Freelancers can browse available projects and view project details.
 
-## Team Contributions
+### Proposal Features
 
-### Prasanthi
+Freelancers can submit proposals for available projects.
 
-- Client Registration
-- Freelancer Registration
-- User Login
-- Manage Profile
-- Post Project
-- Created and merged feature Pull Requests
+The proposal workflow allows:
 
-### SriVyshnavi
+- Freelancer to select a project.
+- Freelancer to submit a proposal.
+- Client to view received proposals.
+- Client to review freelancer proposals.
+- Client to accept a suitable proposal.
+- Accepted proposal to be associated with the project.
 
-- Improved frontend project description
-- Added project setup documentation
-- Added Git collaboration workflow documentation
-- Created and merged Pull Request #7
-- Participated in code review and collaborative development
+---
 
-## Testing
+## 4. Application Workflow
 
-The implemented features were manually tested to verify:
+### Complete Client and Freelancer Workflow
 
-- Registration forms are displayed correctly.
-- Login form is displayed correctly.
-- Profile management fields are displayed correctly.
-- Post Project form is displayed correctly.
-- Required fields are available.
-- Frontend changes are visible in the browser.
-- Project documentation is available.
-- Git workflow and Pull Request process were successfully demonstrated.
+```text
+Client Registration
+        ↓
+Client Login
+        ↓
+Client Dashboard
+        ↓
+Post Project
+        ↓
+Project Available
+        ↓
+Freelancer Login
+        ↓
+Freelancer Dashboard
+        ↓
+Browse Projects
+        ↓
+View Project Details
+        ↓
+Submit Proposal
+        ↓
+Client Reviews Proposals
+        ↓
+Accept Proposal
+        ↓
+Project Assigned
+        ↓
+Freelancer Sees Accepted Project
+
+Client Flow
+
+Client Registration
+        ↓
+Client Login
+        ↓
+Client Dashboard
+        ↓
+Post Project
+        ↓
+View My Projects
+        ↓
+View Proposals
+        ↓
+Review Freelancer Proposal
+        ↓
+Accept Proposal
+
+
+Freelancer Flow
+
+Freelancer Registration
+        ↓
+Freelancer Login
+        ↓
+Freelancer Dashboard
+        ↓
+Browse Projects
+        ↓
+View Project Details
+        ↓
+Submit Proposal
+        ↓
+My Proposals
+        ↓
+Check Proposal Status
+        ↓
+View Accepted Project
+
+
+Proposal Acceptance Flow
+Freelancer Submits Proposal
+            ↓
+Client Receives Proposal
+            ↓
+Client Opens Proposals
+            ↓
+Client Reviews Proposal
+            ↓
+Client Accepts Proposal
+            ↓
+Proposal Status = Accepted
+            ↓
+Project Assigned
+            ↓
+Freelancer Can See Accepted Project
+
+
+5. Project Structure
+freelance-project-collaboration-platform/
+│
+├── backend/
+│   ├── app.py
+│   └── README.md
+│
+├── frontend/
+│   ├── index.html
+│   ├── register.html
+│   ├── login.html
+│   ├── client-dashboard.html
+│   ├── freelancer-dashboard.html
+│   ├── profile.html
+│   ├── projects.html
+│   ├── project-details.html
+│   ├── post-project.html
+│   ├── proposals.html
+│   ├── submit-proposal.html
+│   ├── my-proposals.html
+│   ├── script.js
+│   └── style.css
+│
+├── docs/
+│
+├── testcases/
+│
+├── .gitignore
+│
+└── README.md
+Frontend
+
+The frontend/ folder contains the user interface of the Freelance Project Collaboration Platform.
+
+It contains pages for:
+
+Home
+Registration
+Login
+Client Dashboard
+Freelancer Dashboard
+Profile
+Projects
+Project Details
+Post Project
+Proposals
+Submit Proposal
+My Proposals
+Backend
+
+The backend/ folder contains the server-side application and backend logic.
+
+Documentation
+
+The docs/ folder contains project-related documentation.
+
+Test Cases
+
+The testcases/ folder contains test cases used to verify the implemented features.
+
+6. Technologies Used
+Frontend Technologies
+HTML5
+CSS3
+JavaScript
+Backend Technologies
+Python
+Flask
+Version Control
+Git
+GitHub
+Development Tools
+Visual Studio Code
+Git Bash
+Web Browser
+Deployment
+Amazon Web Services (AWS)
+Amazon EC2
+Linux Server
+7. Project Setup
+Prerequisites
+
+The following software is required:
+
+Git
+Python
+Visual Studio Code
+Git Bash
+A modern web browser

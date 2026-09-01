@@ -15,7 +15,6 @@
         rel="stylesheet"
         href="style.css">
 
-
     <style>
 
         body {
@@ -25,23 +24,21 @@
             color: #111827;
         }
 
-
         .dashboard {
             min-height: 100vh;
         }
 
-
         /* ================= NAVBAR ================= */
 
         .dashboard-nav {
-            height: 70px;
+            min-height: 70px;
             background: #173b8f;
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 0 50px;
+            box-sizing: border-box;
         }
-
 
         .dashboard-logo {
             color: white;
@@ -50,18 +47,15 @@
             text-decoration: none;
         }
 
-
         .dashboard-logo span {
             color: #60a5fa;
         }
 
-
         .dashboard-links {
             display: flex;
             align-items: center;
-            gap: 28px;
+            gap: 22px;
         }
-
 
         .dashboard-links a {
             color: white;
@@ -70,18 +64,15 @@
             font-weight: 600;
         }
 
-
         .dashboard-links a:hover {
             color: #bfdbfe;
         }
-
 
         .logout-btn {
             border: 1px solid white;
             padding: 9px 16px;
             border-radius: 7px;
         }
-
 
         /* ================= MAIN ================= */
 
@@ -90,7 +81,6 @@
             margin: auto;
             padding: 45px 25px 70px;
         }
-
 
         /* ================= WELCOME ================= */
 
@@ -105,23 +95,21 @@
             padding: 40px;
             color: white;
             margin-bottom: 30px;
+
             box-shadow:
                 0 10px 30px
                 rgba(37, 99, 235, 0.18);
         }
-
 
         .welcome-section small {
             font-size: 13px;
             opacity: 0.85;
         }
 
-
         .welcome-section h1 {
             margin: 10px 0;
             font-size: 34px;
         }
-
 
         .welcome-section p {
             margin: 0;
@@ -130,20 +118,16 @@
             opacity: 0.9;
         }
 
-
         /* ================= ACCEPTED NOTIFICATION ================= */
 
         .accepted-section {
             display: none;
 
             background: #f0fdf4;
-
             border: 1px solid #bbf7d0;
-
             border-radius: 18px;
 
             padding: 25px;
-
             margin-bottom: 30px;
 
             box-shadow:
@@ -151,144 +135,96 @@
                 rgba(22, 101, 52, 0.08);
         }
 
-
         .accepted-header {
             display: flex;
-
             align-items: center;
-
             gap: 15px;
-
             margin-bottom: 18px;
         }
 
-
         .accepted-icon {
             width: 50px;
-
             height: 50px;
-
             border-radius: 50%;
 
             background: #dcfce7;
 
             display: flex;
-
             align-items: center;
-
             justify-content: center;
 
             font-size: 25px;
         }
 
-
         .accepted-header h2 {
             margin: 0;
-
             color: #166534;
-
             font-size: 22px;
         }
 
-
         .accepted-header p {
             margin: 5px 0 0;
-
             color: #15803d;
         }
 
-
         .accepted-project {
             background: white;
-
             border: 1px solid #dcfce7;
-
             border-radius: 12px;
-
             padding: 20px;
         }
 
-
         .accepted-project h3 {
             margin: 0 0 8px;
-
             color: #111827;
-
             font-size: 20px;
         }
 
-
         .accepted-project p {
             margin: 0 0 18px;
-
             color: #64748b;
-
             line-height: 1.6;
         }
 
-
         .accepted-details {
             display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
+            grid-template-columns: repeat(3, 1fr);
             gap: 15px;
-
             margin-bottom: 18px;
         }
 
-
         .accepted-detail {
             background: #f8fafc;
-
             border-radius: 10px;
-
             padding: 15px;
         }
 
-
         .accepted-detail span {
             display: block;
-
             color: #94a3b8;
-
             font-size: 12px;
-
             margin-bottom: 5px;
         }
 
-
         .accepted-detail strong {
             color: #111827;
-
             font-size: 16px;
         }
 
-
         .view-project-btn {
             display: inline-block;
-
             padding: 11px 18px;
-
             background: #16a34a;
-
             color: white;
-
             text-decoration: none;
-
             border-radius: 8px;
-
             font-size: 14px;
-
             font-weight: 600;
         }
-
 
         .view-project-btn:hover {
             background: #15803d;
         }
-
 
         /* ================= SECTION ================= */
 
@@ -296,20 +232,15 @@
             margin-bottom: 18px;
         }
 
-
         .section-title h2 {
             margin: 0;
-
             font-size: 24px;
         }
 
-
         .section-title p {
             margin-top: 7px;
-
             color: #64748b;
         }
-
 
         /* ================= ACTIONS ================= */
 
@@ -324,12 +255,10 @@
             margin-bottom: 35px;
         }
 
-
         .action-card {
             background: white;
 
             border: 1px solid #e5e7eb;
-
             border-radius: 16px;
 
             padding: 25px;
@@ -339,14 +268,12 @@
                 rgba(15, 23, 42, 0.05);
 
             text-decoration: none;
-
             color: inherit;
 
             transition:
                 transform 0.2s,
                 box-shadow 0.2s;
         }
-
 
         .action-card:hover {
             transform: translateY(-4px);
@@ -356,18 +283,14 @@
                 rgba(15, 23, 42, 0.1);
         }
 
-
         .action-icon {
             width: 48px;
-
             height: 48px;
 
             border-radius: 12px;
 
             display: flex;
-
             align-items: center;
-
             justify-content: center;
 
             background: #eff6ff;
@@ -377,7 +300,6 @@
             margin-bottom: 18px;
         }
 
-
         .action-card h3 {
             margin: 0 0 8px;
 
@@ -385,7 +307,6 @@
 
             font-size: 18px;
         }
-
 
         .action-card p {
             margin: 0;
@@ -396,7 +317,6 @@
 
             line-height: 1.5;
         }
-
 
         .action-link {
             display: inline-block;
@@ -410,6 +330,11 @@
             font-size: 14px;
         }
 
+        /* ================= NEW FEATURE CARDS ================= */
+
+        .feature-card {
+            border-left: 4px solid #2563eb;
+        }
 
         /* ================= STATS ================= */
 
@@ -421,7 +346,6 @@
 
             gap: 20px;
         }
-
 
         .stat-card {
             background: white;
@@ -437,13 +361,10 @@
                 rgba(15, 23, 42, 0.05);
         }
 
-
         .stat-card span {
             color: #64748b;
-
             font-size: 14px;
         }
-
 
         .stat-card strong {
             display: block;
@@ -454,7 +375,6 @@
 
             color: #173b8f;
         }
-
 
         /* ================= FOOTER ================= */
 
@@ -470,35 +390,29 @@
             font-size: 14px;
         }
 
+        /* ================= RESPONSIVE ================= */
 
-        /* ================= MOBILE ================= */
-
-        @media (max-width: 800px) {
+        @media (max-width: 900px) {
 
             .dashboard-nav {
                 padding: 0 20px;
             }
 
-
             .dashboard-links {
                 gap: 12px;
             }
-
 
             .action-grid,
             .stats-grid {
                 grid-template-columns: 1fr;
             }
 
-
             .accepted-details {
                 grid-template-columns: 1fr;
             }
-
         }
 
-
-        @media (max-width: 600px) {
+        @media (max-width: 650px) {
 
             .dashboard-nav {
                 height: auto;
@@ -510,23 +424,19 @@
                 gap: 15px;
             }
 
-
             .dashboard-links {
                 flex-wrap: wrap;
 
                 justify-content: center;
             }
 
-
             .welcome-section {
                 padding: 28px;
             }
 
-
             .welcome-section h1 {
                 font-size: 27px;
             }
-
         }
 
     </style>
@@ -536,14 +446,12 @@
 
 <body>
 
-
 <div class="dashboard">
 
 
     <!-- ================= NAVBAR ================= -->
 
     <nav class="dashboard-nav">
-
 
         <a
             href="index.html"
@@ -556,26 +464,31 @@
 
         <div class="dashboard-links">
 
-
             <a href="freelancer-dashboard.html">
                 Dashboard
             </a>
-
 
             <a href="browse-projects.html">
                 Browse Projects
             </a>
 
-
             <a href="my-proposals.html">
                 My Proposals
             </a>
 
+            <!-- NEW -->
+
+            <a href="chat.html">
+                Messages
+            </a>
+
+            <a href="video-call.html">
+                Video Call
+            </a>
 
             <a href="profile.html">
                 Profile
             </a>
-
 
             <a
                 href="index.html"
@@ -585,11 +498,10 @@
 
             </a>
 
-
         </div>
 
-
     </nav>
+
 
 
     <!-- ================= MAIN ================= -->
@@ -597,20 +509,17 @@
     <main class="dashboard-main">
 
 
-        <!-- WELCOME -->
+        <!-- ================= WELCOME ================= -->
 
         <section class="welcome-section">
-
 
             <small>
                 FREELANCER WORKSPACE
             </small>
 
-
             <h1 id="welcomeName">
                 Welcome, Freelancer 👋
             </h1>
-
 
             <p>
 
@@ -620,8 +529,8 @@
 
             </p>
 
-
         </section>
+
 
 
         <!-- ================= ACCEPTED NOTIFICATION ================= -->
@@ -630,14 +539,11 @@
             id="acceptedSection"
             class="accepted-section">
 
-
             <div class="accepted-header">
-
 
                 <div class="accepted-icon">
                     🎉
                 </div>
-
 
                 <div>
 
@@ -652,7 +558,6 @@
 
                 </div>
 
-
             </div>
 
 
@@ -660,8 +565,8 @@
                 id="acceptedProjects">
             </div>
 
-
         </section>
+
 
 
         <!-- ================= QUICK ACTIONS ================= -->
@@ -683,103 +588,145 @@
         <section class="action-grid">
 
 
+            <!-- BROWSE -->
+
             <a
                 href="browse-projects.html"
                 class="action-card">
-
 
                 <div class="action-icon">
                     🔍
                 </div>
 
-
                 <h3>
                     Browse Projects
                 </h3>
 
-
                 <p>
-
                     Explore projects posted by clients
                     and find opportunities that match
                     your skills.
-
                 </p>
-
 
                 <span class="action-link">
                     Find Projects →
                 </span>
 
-
             </a>
 
+
+
+            <!-- PROPOSALS -->
 
             <a
                 href="my-proposals.html"
                 class="action-card">
 
-
                 <div class="action-icon">
                     📩
                 </div>
-
 
                 <h3>
                     My Proposals
                 </h3>
 
-
                 <p>
-
                     Track the proposals you have
                     submitted and check whether
                     clients have accepted them.
-
                 </p>
-
 
                 <span class="action-link">
                     View Proposals →
                 </span>
 
-
             </a>
 
+
+
+            <!-- PROFILE -->
 
             <a
                 href="profile.html"
                 class="action-card">
 
-
                 <div class="action-icon">
                     👤
                 </div>
-
 
                 <h3>
                     Manage Profile
                 </h3>
 
-
                 <p>
-
                     Update your professional profile,
                     skills, contact information,
                     and biography.
-
                 </p>
-
 
                 <span class="action-link">
                     Edit Profile →
                 </span>
 
+            </a>
+
+
+
+            <!-- ================= CHAT ================= -->
+
+            <a
+                href="chat.html"
+                class="action-card feature-card">
+
+                <div class="action-icon">
+                    💬
+                </div>
+
+                <h3>
+                    Messages
+                </h3>
+
+                <p>
+                    Chat with clients about project
+                    requirements, updates, and work.
+                </p>
+
+                <span class="action-link">
+                    Open Messages →
+                </span>
+
+            </a>
+
+
+
+            <!-- ================= VIDEO CALL ================= -->
+
+            <a
+                href="video-call.html"
+                class="action-card feature-card">
+
+                <div class="action-icon">
+                    📹
+                </div>
+
+                <h3>
+                    Video Call
+                </h3>
+
+                <p>
+                    Join a video call with your client
+                    for project discussions and meetings.
+                </p>
+
+                <span class="action-link">
+                    Start Video Call →
+                </span>
 
             </a>
 
 
         </section>
+
 
 
         <!-- ================= ACTIVITY ================= -->
@@ -789,7 +736,6 @@
             <h2>
                 Your Activity
             </h2>
-
 
             <p>
                 Overview of your proposal activity.
@@ -846,16 +792,19 @@
     </main>
 
 
+
     <!-- ================= FOOTER ================= -->
 
     <footer class="dashboard-footer">
 
-        © 2026 FreelanceHub. All rights reserved.
+        © 2026 FreelanceHub.
+        All rights reserved.
 
     </footer>
 
 
 </div>
+
 
 
 <script>
@@ -874,6 +823,7 @@ function getCurrentUser() {
     ) || {};
 
 }
+
 
 
 /* =====================================================
@@ -905,6 +855,7 @@ function loadDashboard() {
         .toLowerCase();
 
 
+
     /* =========================
        USER NAME
     ========================= */
@@ -913,6 +864,7 @@ function loadDashboard() {
         "welcomeName"
     ).textContent =
         `Welcome, ${userName} 👋`;
+
 
 
     /* =========================
@@ -927,6 +879,7 @@ function loadDashboard() {
         ) || [];
 
 
+
     /* =========================
        PROPOSALS
     ========================= */
@@ -937,6 +890,7 @@ function loadDashboard() {
                 "proposals"
             )
         ) || [];
+
 
 
     /* =========================
@@ -974,6 +928,7 @@ function loadDashboard() {
                     .toLowerCase();
 
 
+
                 /* EMAIL MATCH */
 
                 if (
@@ -989,6 +944,7 @@ function loadDashboard() {
                 }
 
 
+
                 /* NAME MATCH */
 
                 return (
@@ -998,6 +954,7 @@ function loadDashboard() {
 
             }
         );
+
 
 
     /* =========================
@@ -1014,6 +971,7 @@ function loadDashboard() {
         "proposalCount"
     ).textContent =
         myProposals.length;
+
 
 
     /* =========================
@@ -1039,6 +997,7 @@ function loadDashboard() {
         acceptedProposals.length;
 
 
+
     /* =========================
        ACCEPTED PROJECTS
     ========================= */
@@ -1056,6 +1015,7 @@ function loadDashboard() {
                     return false;
 
                 }
+
 
 
                 const assignedEmail =
@@ -1084,6 +1044,7 @@ function loadDashboard() {
                     .toLowerCase();
 
 
+
                 /* EMAIL MATCH */
 
                 if (
@@ -1099,6 +1060,7 @@ function loadDashboard() {
                 }
 
 
+
                 /* NAME MATCH */
 
                 return (
@@ -1108,6 +1070,7 @@ function loadDashboard() {
 
             }
         );
+
 
 
     /* =========================
@@ -1126,6 +1089,7 @@ function loadDashboard() {
         );
 
 
+
     if (
         acceptedProjects.length === 0
     ) {
@@ -1141,12 +1105,14 @@ function loadDashboard() {
     }
 
 
+
     acceptedSection.style.display =
         "block";
 
 
     acceptedContainer.innerHTML =
         "";
+
 
 
     acceptedProjects.forEach(
@@ -1163,6 +1129,7 @@ function loadDashboard() {
                 "accepted-project";
 
 
+
             card.innerHTML = `
 
                 <h3>
@@ -1172,18 +1139,13 @@ function loadDashboard() {
                     )}
                 </h3>
 
-
                 <p>
-
                     The client has accepted your
                     proposal and assigned this project
                     to you.
-
                 </p>
 
-
                 <div class="accepted-details">
-
 
                     <div class="accepted-detail">
 
@@ -1192,7 +1154,6 @@ function loadDashboard() {
                         </span>
 
                         <strong>
-
                             ₹${Number(
                                 getAcceptedBudget(
                                     project,
@@ -1201,7 +1162,6 @@ function loadDashboard() {
                             ).toLocaleString(
                                 "en-IN"
                             )}
-
                         </strong>
 
                     </div>
@@ -1214,13 +1174,11 @@ function loadDashboard() {
                         </span>
 
                         <strong>
-
                             ${getAcceptedDelivery(
                                 project,
                                 acceptedProposals
                             )}
                             days
-
                         </strong>
 
                     </div>
@@ -1237,7 +1195,6 @@ function loadDashboard() {
                         </strong>
 
                     </div>
-
 
                 </div>
 
@@ -1262,6 +1219,7 @@ function loadDashboard() {
     );
 
 }
+
 
 
 /* =====================================================
@@ -1306,6 +1264,7 @@ function getAcceptedBudget(
 }
 
 
+
 /* =====================================================
    GET ACCEPTED DELIVERY
 ===================================================== */
@@ -1344,6 +1303,7 @@ function getAcceptedDelivery(
 }
 
 
+
 /* =====================================================
    SELECT PROJECT
 ===================================================== */
@@ -1356,6 +1316,7 @@ function selectProject(id) {
     );
 
 }
+
 
 
 /* =====================================================
@@ -1379,19 +1340,16 @@ function escapeHTML(value) {
 }
 
 
+
 /* =====================================================
-   AUTO REFRESH
+   START
 ===================================================== */
 
 loadDashboard();
 
 
 /*
-   Check for changes every 3 seconds.
-
-   This means if the client accepts a proposal
-   while this dashboard is open, the notification
-   can appear automatically.
+   Refresh dashboard data every 3 seconds.
 */
 
 setInterval(

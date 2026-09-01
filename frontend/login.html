@@ -65,7 +65,7 @@
         }
 
 
-        /* ================= LOGIN ================= */
+        /* ================= LOGIN CONTAINER ================= */
 
         .login-container {
 
@@ -108,6 +108,8 @@
         }
 
 
+        /* ================= FORM ================= */
+
         label {
 
             display: block;
@@ -148,6 +150,8 @@
 
         }
 
+
+        /* ================= BUTTON ================= */
 
         button {
 
@@ -200,7 +204,7 @@
         }
 
 
-        .error {
+        .message.error {
 
             background: #fee2e2;
 
@@ -209,7 +213,7 @@
         }
 
 
-        .success {
+        .message.success {
 
             background: #dcfce7;
 
@@ -322,9 +326,11 @@
             Home
         </a>
 
+
         <a href="register.html">
             Register
         </a>
+
 
         <a href="login.html">
             Login
@@ -335,7 +341,8 @@
 </nav>
 
 
-<!-- ================= LOGIN FORM ================= -->
+
+<!-- ================= LOGIN ================= -->
 
 <div class="login-container">
 
@@ -350,21 +357,28 @@
     </p>
 
 
+
     <form
         onsubmit="loginUser(event)">
 
 
+        <!-- EMAIL -->
+
         <label for="loginEmail">
-            Email
+            Email Address
         </label>
 
 
         <input
             type="email"
             id="loginEmail"
-            placeholder="Enter your email"
+            placeholder="Enter your registered email"
+            autocomplete="email"
             required>
 
+
+
+        <!-- PASSWORD -->
 
         <label for="loginPassword">
             Password
@@ -375,22 +389,36 @@
             type="password"
             id="loginPassword"
             placeholder="Enter your password"
+            autocomplete="current-password"
             required>
 
 
-        <button type="submit">
+
+        <!-- LOGIN BUTTON -->
+
+        <button
+            type="submit">
+
             Login
+
         </button>
 
 
     </form>
 
 
+
+    <!-- MESSAGE -->
+
     <div
         id="message"
         class="message">
+
     </div>
 
+
+
+    <!-- LINKS -->
 
     <div class="links">
 
@@ -410,7 +438,7 @@
 
             <a
                 href="#"
-                onclick="forgotPassword()">
+                onclick="forgotPassword(event)">
 
                 Forgot Password?
 
@@ -425,28 +453,36 @@
 </div>
 
 
+
 <!-- ================= FOOTER ================= -->
 
 <footer>
 
     <p>
+
         © 2026 Freelance Project Collaboration Platform
+
     </p>
 
 </footer>
+
 
 
 <script>
 
 
 /* =====================================================
-   LOGIN
+   LOGIN FUNCTION
 ===================================================== */
 
 function loginUser(event) {
 
     event.preventDefault();
 
+
+    /* =========================
+       GET INPUT VALUES
+    ========================= */
 
     const email =
         document
@@ -468,20 +504,8 @@ function loginUser(event) {
         );
 
 
-    /*
-       Get registered users.
-
-       We support several possible localStorage
-       names so this works with your existing
-       project data.
-    */
-
-
-    let allUsers = [];
-
-
     /* =========================
-       users
+       GET REGISTERED USERS
     ========================= */
 
     const users =
@@ -492,133 +516,40 @@ function loginUser(event) {
         ) || [];
 
 
-    if (Array.isArray(users)) {
-
-        allUsers =
-            allUsers.concat(users);
-
-    }
-
-
     /* =========================
-       registeredUsers
+       CHECK USERS ARRAY
     ========================= */
 
-    const registeredUsers =
-        JSON.parse(
-            localStorage.getItem(
-                "registeredUsers"
-            )
-        ) || [];
+    if (!Array.isArray(users)) {
 
+        showMessage(
+            "No registered users found. Please register first.",
+            "error"
+        );
 
-    if (
-        Array.isArray(
-            registeredUsers
-        )
-    ) {
-
-        allUsers =
-            allUsers.concat(
-                registeredUsers
-            );
+        return;
 
     }
 
 
     /* =========================
-       clients
-    ========================= */
-
-    const clients =
-        JSON.parse(
-            localStorage.getItem(
-                "clients"
-            )
-        ) || [];
-
-
-    if (Array.isArray(clients)) {
-
-        allUsers =
-            allUsers.concat(
-
-                clients.map(
-                    function(user) {
-
-                        return {
-                            ...user,
-                            role:
-                                user.role ||
-                                "client"
-                        };
-
-                    }
-                )
-
-            );
-
-    }
-
-
-    /* =========================
-       freelancers
-    ========================= */
-
-    const freelancers =
-        JSON.parse(
-            localStorage.getItem(
-                "freelancers"
-            )
-        ) || [];
-
-
-    if (
-        Array.isArray(
-            freelancers
-        )
-    ) {
-
-        allUsers =
-            allUsers.concat(
-
-                freelancers.map(
-                    function(user) {
-
-                        return {
-                            ...user,
-                            role:
-                                user.role ||
-                                "freelancer"
-                        };
-
-                    }
-                )
-
-            );
-
-    }
-
-
-    /* =========================
-       FIND USER
+       FIND MATCHING USER
     ========================= */
 
     const user =
-        allUsers.find(
+        users.find(
             function(item) {
 
-                const itemEmail =
+                const savedEmail =
                     String(
                         item.email ||
-                        item.emailAddress ||
                         ""
                     )
                     .trim()
                     .toLowerCase();
 
 
-                const itemPassword =
+                const savedPassword =
                     String(
                         item.password ||
                         ""
@@ -626,8 +557,8 @@ function loginUser(event) {
 
 
                 return (
-                    itemEmail === email &&
-                    itemPassword === password
+                    savedEmail === email &&
+                    savedPassword === password
                 );
 
             }
@@ -635,102 +566,56 @@ function loginUser(event) {
 
 
     /* =========================
-       LOGIN FAILED
+       INVALID LOGIN
     ========================= */
 
     if (!user) {
 
-        message.style.display =
-            "block";
-
-        message.className =
-            "message error";
-
-        message.textContent =
-            "Invalid email or password.";
+        showMessage(
+            "Invalid email or password.",
+            "error"
+        );
 
         return;
 
     }
 
 
-    /* =================================================
-       DETERMINE ROLE
-    ================================================= */
+    /* =========================
+       GET ROLE
+    ========================= */
 
-    let role =
+    const role =
         String(
             user.role ||
-            user.userType ||
-            user.type ||
             ""
         )
+        .trim()
         .toLowerCase();
 
 
-    /*
-       If role isn't stored,
-       check whether user exists in
-       clients/freelancers.
-    */
+    /* =========================
+       CHECK ROLE
+    ========================= */
 
-    if (!role) {
+    if (
+        role !== "client" &&
+        role !== "freelancer"
+    ) {
 
-        const freelancerExists =
-            freelancers.some(
-                function(item) {
+        showMessage(
+            "Your account role is missing or invalid. Please register again.",
+            "error"
+        );
 
-                    return (
-                        String(
-                            item.email ||
-                            ""
-                        )
-                        .trim()
-                        .toLowerCase() ===
-                        email
-                    );
-
-                }
-            );
-
-
-        const clientExists =
-            clients.some(
-                function(item) {
-
-                    return (
-                        String(
-                            item.email ||
-                            ""
-                        )
-                        .trim()
-                        .toLowerCase() ===
-                        email
-                    );
-
-                }
-            );
-
-
-        if (freelancerExists) {
-
-            role =
-                "freelancer";
-
-        }
-        else if (clientExists) {
-
-            role =
-                "client";
-
-        }
+        return;
 
     }
 
 
-    /* =================================================
-       NORMALIZE USER
-    ================================================= */
+    /* =========================
+       CREATE CURRENT USER
+    ========================= */
 
     const currentUser = {
 
@@ -740,22 +625,16 @@ function loginUser(event) {
 
         name:
             user.name ||
-            user.fullName ||
-            user.full_name ||
-            user.username ||
             "User",
 
         email:
-            user.email ||
-            user.emailAddress ||
-            email,
+            user.email,
 
         password:
-            user.password ||
-            password,
+            user.password,
 
         role:
-            role || "freelancer",
+            role,
 
         skills:
             user.skills ||
@@ -767,14 +646,18 @@ function loginUser(event) {
 
         bio:
             user.bio ||
+            "",
+
+        createdAt:
+            user.createdAt ||
             ""
 
     };
 
 
-    /* =================================================
+    /* =========================
        SAVE CURRENT USER
-    ================================================= */
+    ========================= */
 
     localStorage.setItem(
         "currentUser",
@@ -784,42 +667,55 @@ function loginUser(event) {
     );
 
 
-    /* =================================================
-       SUCCESS MESSAGE
-    ================================================= */
+    /* =========================
+       SHOW SUCCESS
+    ========================= */
 
-    message.style.display =
-        "block";
-
-    message.className =
-        "message success";
-
-    message.textContent =
-        "Login successful! Redirecting...";
+    showMessage(
+        "Login successful! Redirecting...",
+        "success"
+    );
 
 
-    /* =================================================
-       REDIRECT
-    ================================================= */
+    /* =========================
+       ROLE-BASED REDIRECT
+    ========================= */
 
     setTimeout(
         function() {
 
+
+            /* =====================
+               CLIENT
+            ===================== */
+
             if (
-                currentUser.role
-                    .includes("client")
+                role === "client"
             ) {
 
                 window.location.href =
                     "client-dashboard.html";
 
+                return;
+
             }
-            else {
+
+
+            /* =====================
+               FREELANCER
+            ===================== */
+
+            if (
+                role === "freelancer"
+            ) {
 
                 window.location.href =
                     "freelancer-dashboard.html";
 
+                return;
+
             }
+
 
         },
         700
@@ -829,10 +725,43 @@ function loginUser(event) {
 
 
 /* =====================================================
+   SHOW MESSAGE
+===================================================== */
+
+function showMessage(
+    text,
+    type
+) {
+
+    const message =
+        document.getElementById(
+            "message"
+        );
+
+
+    message.style.display =
+        "block";
+
+
+    message.className =
+        "message " +
+        type;
+
+
+    message.textContent =
+        text;
+
+}
+
+
+/* =====================================================
    FORGOT PASSWORD
 ===================================================== */
 
-function forgotPassword() {
+function forgotPassword(event) {
+
+    event.preventDefault();
+
 
     alert(
         "Password reset functionality will be available soon."

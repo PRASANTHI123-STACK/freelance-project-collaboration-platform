@@ -1,0 +1,2302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Project Video Call - FreelanceHub</title>
+
+    <!-- Socket.IO -->
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            color: #1f2937;
+        }
+
+        .navbar {
+            height: 48px;
+            background: white;
+            border-bottom: 1px solid #ddd;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 0 18px;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .back {
+            color: #2563eb;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 810px;
+            margin: 22px auto;
+            padding: 0 12px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+
+            box-shadow:
+                0 3px 15px rgba(0,0,0,0.08);
+        }
+
+        .header {
+            padding: 18px 20px;
+        }
+
+        .header h2 {
+            margin: 0 0 6px;
+            font-size: 20px;
+        }
+
+        .header p {
+            margin: 0 0 10px;
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        #status {
+            display: inline-block;
+
+            padding: 5px 10px;
+
+            border-radius: 20px;
+
+            background: #fff3cd;
+            color: #856404;
+
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .video-area {
+            background: #111827;
+            padding: 16px;
+        }
+
+        .remote-container {
+            height: 390px;
+
+            background: #1f2937;
+
+            border-radius: 8px;
+
+            position: relative;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+        }
+
+        #remoteVideo {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            background: #1f2937;
+
+            display: none;
+        }
+
+        #waiting {
+            text-align: center;
+            color: white;
+        }
+
+        #waiting .icon {
+            font-size: 45px;
+            margin-bottom: 10px;
+        }
+
+        #waiting p {
+            margin: 0;
+            font-size: 15px;
+        }
+
+        .local-container {
+            position: absolute;
+
+            right: 15px;
+            bottom: 15px;
+
+            width: 175px;
+            height: 120px;
+
+            background: #374151;
+
+            border: 2px solid white;
+
+            border-radius: 10px;
+
+            overflow: hidden;
+
+            z-index: 10;
+        }
+
+        #localVideo {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            background: #374151;
+        }
+
+        .label {
+            position: absolute;
+
+            bottom: 5px;
+            left: 6px;
+
+            background: rgba(0,0,0,0.75);
+
+            color: white;
+
+            padding: 3px 7px;
+
+            border-radius: 4px;
+
+            font-size: 10px;
+
+            z-index: 20;
+        }
+
+        .controls {
+            padding: 16px;
+
+            display: flex;
+            justify-content: center;
+
+            gap: 10px;
+
+            flex-wrap: wrap;
+        }
+
+        button {
+            border: none;
+
+            border-radius: 8px;
+
+            padding: 13px 20px;
+
+            font-size: 14px;
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        #startCall {
+            background: #16a34a;
+            color: white;
+        }
+
+        #muteBtn,
+        #cameraBtn {
+            background: #2563eb;
+            color: white;
+        }
+
+        #endCall {
+            background: #dc2626;
+            color: white;
+        }
+
+        .room-card {
+            margin-top: 16px;
+
+            background: white;
+
+            padding: 16px;
+
+            border-radius: 10px;
+
+            box-shadow:
+                0 3px 12px rgba(0,0,0,0.05);
+        }
+
+        .room-card h3 {
+            margin: 0 0 8px;
+            font-size: 15px;
+        }
+
+        .room-card p {
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        .room-row {
+            display: flex;
+            gap: 8px;
+        }
+
+        #roomLink {
+            flex: 1;
+
+            padding: 10px;
+
+            border: 1px solid #cbd5e1;
+
+            border-radius: 6px;
+
+            font-size: 12px;
+        }
+
+        #copyBtn {
+            background: #2563eb;
+            color: white;
+
+            padding: 10px 15px;
+        }
+
+        .error-box {
+            display: none;
+
+            margin-top: 10px;
+
+            padding: 10px;
+
+            border-radius: 8px;
+
+            background: #fee2e2;
+            color: #991b1b;
+
+            font-size: 12px;
+        }
+
+        @media (max-width: 600px) {
+
+            .container {
+                margin: 10px auto;
+            }
+
+            .remote-container {
+                height: 300px;
+            }
+
+            .local-container {
+                width: 130px;
+                height: 90px;
+            }
+
+            .room-row {
+                flex-direction: column;
+            }
+
+            #roomLink {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =======================================================
+         NAVBAR
+    ======================================================== -->
+
+    <div class="navbar">
+
+        <div class="logo">
+            FreelanceHub
+        </div>
+
+        <a href="javascript:history.back()"
+           class="back">
+            ← Back
+        </a>
+
+    </div>
+
+
+    <!-- =======================================================
+         MAIN
+    ======================================================== -->
+
+    <div class="container">
+
+        <div class="card">
+
+
+            <!-- HEADER -->
+
+            <div class="header">
+
+                <h2>
+                    📹 Project Video Call
+                </h2>
+
+                <p>
+                    Video communication between client and freelancer
+                </p>
+
+                <span id="status">
+                    Connecting to server...
+                </span>
+
+                <div id="errorBox"
+                     class="error-box">
+                </div>
+
+            </div>
+
+
+            <!-- VIDEO AREA -->
+
+            <div class="video-area">
+
+                <div class="remote-container">
+
+
+                    <!-- REMOTE VIDEO -->
+
+                    <video
+                        id="remoteVideo"
+                        autoplay
+                        playsinline>
+                    </video>
+
+
+                    <!-- WAITING -->
+
+                    <div id="waiting">
+
+                        <div class="icon">
+                            👤
+                        </div>
+
+                        <p>
+                            Waiting for the other participant...
+                        </p>
+
+                    </div>
+
+
+                    <!-- LOCAL VIDEO -->
+
+                    <div class="local-container">
+
+                        <video
+                            id="localVideo"
+                            autoplay
+                            muted
+                            playsinline>
+                        </video>
+
+                        <div class="label">
+                            You
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- CONTROLS -->
+
+            <div class="controls">
+
+                <button id="startCall">
+                    📹 Start Call
+                </button>
+
+                <button id="muteBtn"
+                        disabled>
+                    🎤 Mute
+                </button>
+
+                <button id="cameraBtn"
+                        disabled>
+                    📹 Camera Off
+                </button>
+
+                <button id="endCall"
+                        disabled>
+                    🔴 End Call
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ===================================================
+             ROOM LINK
+        ==================================================== -->
+
+        <div class="room-card">
+
+            <h3>
+                Project Call Room
+            </h3>
+
+            <p>
+                Share this link with the freelancer.
+                Both client and freelancer can join the same project video call.
+            </p>
+
+            <div class="room-row">
+
+                <input
+                    type="text"
+                    id="roomLink"
+                    readonly>
+
+                <button id="copyBtn">
+                    Copy Link
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+<script>
+
+
+/* ============================================================
+   SERVER CONFIGURATION
+   ============================================================ */
+
+/*
+   IMPORTANT:
+
+   This is the IP shown by your Flask server:
+
+       172.20.56.147
+
+   Flask:
+       http://172.20.56.147:8000
+
+   Frontend Live Server:
+       http://172.20.56.147:5500
+*/
+
+const SERVER_IP = "172.20.56.147";
+
+const SERVER_PORT = 8000;
+
+const FRONTEND_IP = "172.20.56.147";
+
+const FRONTEND_PORT = 5500;
+
+
+/* Socket.IO server */
+
+const SOCKET_SERVER =
+    "http://" +
+    SERVER_IP +
+    ":" +
+    SERVER_PORT;
+
+
+/* ============================================================
+   ROOM
+   ============================================================ */
+
+const urlParams =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const ROOM =
+    urlParams.get("room") ||
+    "freelance-project-room";
+
+
+/* ============================================================
+   HTML ELEMENTS
+   ============================================================ */
+
+const localVideo =
+    document.getElementById(
+        "localVideo"
+    );
+
+
+const remoteVideo =
+    document.getElementById(
+        "remoteVideo"
+    );
+
+
+const waiting =
+    document.getElementById(
+        "waiting"
+    );
+
+
+const status =
+    document.getElementById(
+        "status"
+    );
+
+
+const errorBox =
+    document.getElementById(
+        "errorBox"
+    );
+
+
+const startCall =
+    document.getElementById(
+        "startCall"
+    );
+
+
+const muteBtn =
+    document.getElementById(
+        "muteBtn"
+    );
+
+
+const cameraBtn =
+    document.getElementById(
+        "cameraBtn"
+    );
+
+
+const endCall =
+    document.getElementById(
+        "endCall"
+    );
+
+
+const roomLink =
+    document.getElementById(
+        "roomLink"
+    );
+
+
+const copyBtn =
+    document.getElementById(
+        "copyBtn"
+    );
+
+
+/* ============================================================
+   ROOM LINK
+   ============================================================ */
+
+/*
+   DO NOT use window.location.origin here.
+
+   If the page is opened using:
+
+       127.0.0.1:5500
+
+   window.location.origin becomes:
+
+       http://127.0.0.1:5500
+
+   Another computer/phone cannot use that address.
+
+   Therefore we explicitly use the LAN IP.
+*/
+
+const ROOM_LINK =
+    "http://" +
+    FRONTEND_IP +
+    ":" +
+    FRONTEND_PORT +
+    "/frontend/video-call.html?room=" +
+    encodeURIComponent(ROOM);
+
+
+roomLink.value =
+    ROOM_LINK;
+
+
+/* ============================================================
+   WEBRTC VARIABLES
+   ============================================================ */
+
+let localStream = null;
+
+let peerConnection = null;
+
+let remoteSocketId = null;
+
+let currentRole = null;
+
+let isCallStarted = false;
+
+let isMuted = false;
+
+let isCameraOff = false;
+
+
+/*
+   ICE candidates can sometimes arrive before
+   setRemoteDescription().
+
+   Store them temporarily.
+*/
+
+let pendingIceCandidates = [];
+
+
+/* ============================================================
+   WEBRTC CONFIGURATION
+   ============================================================ */
+
+const rtcConfiguration = {
+
+    iceServers: [
+
+        {
+            urls:
+                "stun:stun.l.google.com:19302"
+        },
+
+        {
+            urls:
+                "stun:stun1.l.google.com:19302"
+        }
+
+    ]
+
+};
+
+
+/* ============================================================
+   HELPER FUNCTIONS
+   ============================================================ */
+
+function setStatus(
+    message,
+    type = "normal"
+) {
+
+    status.innerText =
+        message;
+
+
+    if (type === "success") {
+
+        status.style.background =
+            "#d1fae5";
+
+        status.style.color =
+            "#065f46";
+
+    }
+
+    else if (type === "error") {
+
+        status.style.background =
+            "#fee2e2";
+
+        status.style.color =
+            "#991b1b";
+
+    }
+
+    else {
+
+        status.style.background =
+            "#fff3cd";
+
+        status.style.color =
+            "#856404";
+
+    }
+
+}
+
+
+function showError(message) {
+
+    errorBox.innerText =
+        message;
+
+    errorBox.style.display =
+        "block";
+
+}
+
+
+function hideError() {
+
+    errorBox.innerText =
+        "";
+
+    errorBox.style.display =
+        "none";
+
+}
+
+
+/* ============================================================
+   SOCKET.IO CONNECTION
+   ============================================================ */
+
+console.log(
+    "Connecting to:",
+    SOCKET_SERVER
+);
+
+
+const socket =
+    io(
+        SOCKET_SERVER,
+        {
+            transports: [
+                "websocket",
+                "polling"
+            ],
+
+            reconnection: true,
+
+            reconnectionAttempts: 10,
+
+            reconnectionDelay: 1000
+        }
+    );
+
+
+/* ============================================================
+   SOCKET CONNECTED
+   ============================================================ */
+
+socket.on(
+    "connect",
+    () => {
+
+        console.log(
+            "Socket connected:",
+            socket.id
+        );
+
+
+        hideError();
+
+
+        setStatus(
+            "Connected to server",
+            "success"
+        );
+
+
+        /*
+           Join project room
+        */
+
+        socket.emit(
+            "join-room",
+            {
+                room: ROOM
+            }
+        );
+
+    }
+);
+
+
+/* ============================================================
+   SOCKET DISCONNECTED
+   ============================================================ */
+
+socket.on(
+    "disconnect",
+    (reason) => {
+
+        console.log(
+            "Socket disconnected:",
+            reason
+        );
+
+
+        setStatus(
+            "Disconnected from server",
+            "error"
+        );
+
+    }
+);
+
+
+/* ============================================================
+   SOCKET CONNECTION ERROR
+   ============================================================ */
+
+socket.on(
+    "connect_error",
+    (error) => {
+
+        console.error(
+            "Socket connection error:",
+            error
+        );
+
+
+        setStatus(
+            "Cannot connect to server",
+            "error"
+        );
+
+
+        showError(
+            "Cannot connect to video server at " +
+            SOCKET_SERVER +
+            ". Make sure Flask is running and Windows Firewall allows port 8000."
+        );
+
+    }
+);
+
+
+/* ============================================================
+   ROOM JOINED
+   ============================================================ */
+
+socket.on(
+    "room-joined",
+    (data) => {
+
+        console.log(
+            "Room joined:",
+            data
+        );
+
+
+        currentRole =
+            data.role;
+
+
+        if (data.users === 1) {
+
+            setStatus(
+                "Waiting for freelancer..."
+            );
+
+            waiting.innerHTML =
+                `
+                <div class="icon">👤</div>
+                <p>Waiting for the other participant...</p>
+                `;
+
+        }
+
+        else if (data.users === 2) {
+
+            setStatus(
+                "Participant connected",
+                "success"
+            );
+
+        }
+
+    }
+);
+
+
+/* ============================================================
+   ROOM FULL
+   ============================================================ */
+
+socket.on(
+    "room-full",
+    () => {
+
+        setStatus(
+            "Room is full",
+            "error"
+        );
+
+
+        showError(
+            "This project call already has two participants."
+        );
+
+
+        startCall.disabled =
+            true;
+
+    }
+);
+
+
+/* ============================================================
+   USER JOINED
+   ============================================================ */
+
+socket.on(
+    "user-joined",
+    (data) => {
+
+        console.log(
+            "Participant joined:",
+            data
+        );
+
+
+        if (!data || !data.sid) {
+
+            return;
+
+        }
+
+
+        remoteSocketId =
+            data.sid;
+
+
+        setStatus(
+            "Participant connected",
+            "success"
+        );
+
+
+        waiting.innerHTML =
+            `
+            <div class="icon">📹</div>
+            <p>Participant connected. Start the call.</p>
+            `;
+
+
+        /*
+           IMPORTANT:
+
+           Only CALLER creates the offer.
+
+           This prevents both users creating offers
+           at the same time.
+        */
+
+        if (
+            currentRole === "caller" &&
+            localStream &&
+            !peerConnection
+        ) {
+
+            createOffer();
+
+        }
+
+    }
+);
+
+
+/* ============================================================
+   USER LEFT
+   ============================================================ */
+
+socket.on(
+    "user-left",
+    () => {
+
+        console.log(
+            "Participant left"
+        );
+
+
+        remoteSocketId =
+            null;
+
+
+        closePeerConnection();
+
+
+        remoteVideo.srcObject =
+            null;
+
+
+        remoteVideo.style.display =
+            "none";
+
+
+        waiting.style.display =
+            "block";
+
+
+        setStatus(
+            "Waiting for the other participant..."
+        );
+
+    }
+);
+
+
+/* ============================================================
+   START CALL BUTTON
+   ============================================================ */
+
+startCall.addEventListener(
+    "click",
+    async () => {
+
+        try {
+
+            hideError();
+
+
+            await startLocalMedia();
+
+
+            isCallStarted =
+                true;
+
+
+            startCall.disabled =
+                true;
+
+
+            muteBtn.disabled =
+                false;
+
+
+            cameraBtn.disabled =
+                false;
+
+
+            endCall.disabled =
+                false;
+
+
+            setStatus(
+                "Camera and microphone ready",
+                "success"
+            );
+
+
+            /*
+               Tell other participant
+            */
+
+            socket.emit(
+                "call-started",
+                {
+                    room: ROOM
+                }
+            );
+
+
+            /*
+               If caller already sees participant,
+               create offer.
+            */
+
+            if (
+                currentRole === "caller" &&
+                remoteSocketId
+            ) {
+
+                await createOffer();
+
+            }
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Start call error:",
+                error
+            );
+
+
+            showError(
+                "Camera or microphone permission was denied. Please allow access and try again."
+            );
+
+
+            setStatus(
+                "Camera/microphone error",
+                "error"
+            );
+
+        }
+
+    }
+);
+
+
+/* ============================================================
+   START LOCAL MEDIA
+   ============================================================ */
+
+async function startLocalMedia() {
+
+    if (localStream) {
+
+        return localStream;
+
+    }
+
+
+    if (
+        !navigator.mediaDevices ||
+        !navigator.mediaDevices.getUserMedia
+    ) {
+
+        throw new Error(
+            "getUserMedia is not supported."
+        );
+
+    }
+
+
+    localStream =
+        await navigator.mediaDevices.getUserMedia(
+            {
+                video: {
+                    width: {
+                        ideal: 1280
+                    },
+
+                    height: {
+                        ideal: 720
+                    },
+
+                    facingMode:
+                        "user"
+                },
+
+                audio: true
+            }
+        );
+
+
+    localVideo.srcObject =
+        localStream;
+
+
+    await localVideo.play();
+
+
+    console.log(
+        "Local camera started"
+    );
+
+
+    return localStream;
+
+}
+
+
+/* ============================================================
+   CREATE PEER CONNECTION
+   ============================================================ */
+
+function createPeerConnection() {
+
+    if (peerConnection) {
+
+        return peerConnection;
+
+    }
+
+
+    console.log(
+        "Creating RTCPeerConnection"
+    );
+
+
+    peerConnection =
+        new RTCPeerConnection(
+            rtcConfiguration
+        );
+
+
+    /*
+       Add local camera and microphone
+    */
+
+    if (localStream) {
+
+        localStream
+            .getTracks()
+            .forEach(
+                track => {
+
+                    peerConnection.addTrack(
+                        track,
+                        localStream
+                    );
+
+                }
+            );
+
+    }
+
+
+    /*
+       REMOTE TRACK
+    */
+
+    peerConnection.ontrack =
+        event => {
+
+            console.log(
+                "Remote track received"
+            );
+
+
+            if (
+                event.streams &&
+                event.streams[0]
+            ) {
+
+                remoteVideo.srcObject =
+                    event.streams[0];
+
+
+                remoteVideo.style.display =
+                    "block";
+
+
+                waiting.style.display =
+                    "none";
+
+
+                remoteVideo
+                    .play()
+                    .catch(
+                        error => {
+
+                            console.log(
+                                "Remote play error:",
+                                error
+                            );
+
+                        }
+                    );
+
+
+                setStatus(
+                    "Video call connected",
+                    "success"
+                );
+
+            }
+
+        };
+
+
+    /*
+       ICE CANDIDATE
+    */
+
+    peerConnection.onicecandidate =
+        event => {
+
+            if (
+                event.candidate &&
+                remoteSocketId
+            ) {
+
+                console.log(
+                    "Sending ICE candidate"
+                );
+
+
+                socket.emit(
+                    "ice-candidate",
+                    {
+                        room: ROOM,
+
+                        target:
+                            remoteSocketId,
+
+                        candidate:
+                            event.candidate
+                    }
+                );
+
+            }
+
+        };
+
+
+    /*
+       CONNECTION STATE
+    */
+
+    peerConnection.onconnectionstatechange =
+        () => {
+
+            if (!peerConnection) {
+
+                return;
+
+            }
+
+
+            const state =
+                peerConnection.connectionState;
+
+
+            console.log(
+                "WebRTC connection state:",
+                state
+            );
+
+
+            if (state === "connected") {
+
+                setStatus(
+                    "Video call connected",
+                    "success"
+                );
+
+            }
+
+            else if (
+                state === "connecting"
+            ) {
+
+                setStatus(
+                    "Connecting video..."
+                );
+
+            }
+
+            else if (
+                state === "disconnected"
+            ) {
+
+                setStatus(
+                    "Video connection disconnected",
+                    "error"
+                );
+
+            }
+
+            else if (
+                state === "failed"
+            ) {
+
+                setStatus(
+                    "Video connection failed",
+                    "error"
+                );
+
+            }
+
+            else if (
+                state === "closed"
+            ) {
+
+                setStatus(
+                    "Call ended"
+                );
+
+            }
+
+        };
+
+
+    /*
+       ICE connection state
+    */
+
+    peerConnection.oniceconnectionstatechange =
+        () => {
+
+            if (!peerConnection) {
+
+                return;
+
+            }
+
+
+            console.log(
+                "ICE state:",
+                peerConnection.iceConnectionState
+            );
+
+        };
+
+
+    return peerConnection;
+
+}
+
+
+/* ============================================================
+   CREATE OFFER
+   ============================================================ */
+
+async function createOffer() {
+
+    try {
+
+        if (!localStream) {
+
+            await startLocalMedia();
+
+        }
+
+
+        if (!remoteSocketId) {
+
+            console.log(
+                "No remote participant yet"
+            );
+
+            return;
+
+        }
+
+
+        const pc =
+            createPeerConnection();
+
+
+        /*
+           Create offer
+        */
+
+        const offer =
+            await pc.createOffer();
+
+
+        await pc.setLocalDescription(
+            offer
+        );
+
+
+        console.log(
+            "Sending offer to:",
+            remoteSocketId
+        );
+
+
+        socket.emit(
+            "offer",
+            {
+                room: ROOM,
+
+                target:
+                    remoteSocketId,
+
+                offer:
+                    pc.localDescription
+            }
+        );
+
+
+        setStatus(
+            "Calling participant..."
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Create offer error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* ============================================================
+   RECEIVE OFFER
+   ============================================================ */
+
+socket.on(
+    "offer",
+    async data => {
+
+        console.log(
+            "Offer received:",
+            data
+        );
+
+
+        try {
+
+            remoteSocketId =
+                data.sender;
+
+
+            /*
+               Receiver also needs local camera.
+            */
+
+            if (!localStream) {
+
+                await startLocalMedia();
+
+
+                isCallStarted =
+                    true;
+
+
+                startCall.disabled =
+                    true;
+
+
+                muteBtn.disabled =
+                    false;
+
+
+                cameraBtn.disabled =
+                    false;
+
+
+                endCall.disabled =
+                    false;
+
+            }
+
+
+            const pc =
+                createPeerConnection();
+
+
+            /*
+               Set remote offer
+            */
+
+            await pc.setRemoteDescription(
+                new RTCSessionDescription(
+                    data.offer
+                )
+            );
+
+
+            /*
+               Add queued ICE candidates
+            */
+
+            await processPendingIceCandidates();
+
+
+            /*
+               Create answer
+            */
+
+            const answer =
+                await pc.createAnswer();
+
+
+            await pc.setLocalDescription(
+                answer
+            );
+
+
+            /*
+               Send answer
+            */
+
+            socket.emit(
+                "answer",
+                {
+                    room: ROOM,
+
+                    target:
+                        remoteSocketId,
+
+                    answer:
+                        pc.localDescription
+                }
+            );
+
+
+            setStatus(
+                "Connecting video..."
+            );
+
+
+            console.log(
+                "Answer sent"
+            );
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Offer handling error:",
+                error
+            );
+
+
+            showError(
+                "Unable to establish the video connection."
+            );
+
+        }
+
+    }
+);
+
+
+/* ============================================================
+   RECEIVE ANSWER
+   ============================================================ */
+
+socket.on(
+    "answer",
+    async data => {
+
+        console.log(
+            "Answer received"
+        );
+
+
+        try {
+
+            remoteSocketId =
+                data.sender;
+
+
+            if (!peerConnection) {
+
+                console.error(
+                    "No peer connection for answer"
+                );
+
+                return;
+
+            }
+
+
+            await peerConnection.setRemoteDescription(
+                new RTCSessionDescription(
+                    data.answer
+                )
+            );
+
+
+            /*
+               Process ICE candidates
+            */
+
+            await processPendingIceCandidates();
+
+
+            setStatus(
+                "Connecting video..."
+            );
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Answer error:",
+                error
+            );
+
+        }
+
+    }
+);
+
+
+/* ============================================================
+   RECEIVE ICE CANDIDATE
+   ============================================================ */
+
+socket.on(
+    "ice-candidate",
+    async data => {
+
+        try {
+
+            remoteSocketId =
+                data.sender;
+
+
+            if (!data.candidate) {
+
+                return;
+
+            }
+
+
+            const candidate =
+                new RTCIceCandidate(
+                    data.candidate
+                );
+
+
+            /*
+               If remote description is not ready,
+               queue candidate.
+            */
+
+            if (
+                !peerConnection ||
+                !peerConnection.remoteDescription
+            ) {
+
+                console.log(
+                    "Queueing ICE candidate"
+                );
+
+
+                pendingIceCandidates.push(
+                    candidate
+                );
+
+
+                return;
+
+            }
+
+
+            await peerConnection.addIceCandidate(
+                candidate
+            );
+
+
+            console.log(
+                "ICE candidate added"
+            );
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "ICE candidate error:",
+                error
+            );
+
+        }
+
+    }
+);
+
+
+/* ============================================================
+   PROCESS QUEUED ICE CANDIDATES
+   ============================================================ */
+
+async function processPendingIceCandidates() {
+
+    if (!peerConnection) {
+
+        return;
+
+    }
+
+
+    if (
+        !peerConnection.remoteDescription
+    ) {
+
+        return;
+
+    }
+
+
+    while (
+        pendingIceCandidates.length > 0
+    ) {
+
+        const candidate =
+            pendingIceCandidates.shift();
+
+
+        try {
+
+            await peerConnection.addIceCandidate(
+                candidate
+            );
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Queued ICE error:",
+                error
+            );
+
+        }
+
+    }
+
+}
+
+
+/* ============================================================
+   OTHER USER STARTED CALL
+   ============================================================ */
+
+socket.on(
+    "call-started",
+    async () => {
+
+        console.log(
+            "Other participant started call"
+        );
+
+
+        setStatus(
+            "Participant started call"
+        );
+
+
+        /*
+           If we are receiver, wait for offer.
+
+           If we are caller, create offer.
+        */
+
+        if (
+            currentRole === "caller" &&
+            localStream &&
+            remoteSocketId &&
+            !peerConnection
+        ) {
+
+            await createOffer();
+
+        }
+
+    }
+);
+
+
+/* ============================================================
+   MUTE
+   ============================================================ */
+
+muteBtn.addEventListener(
+    "click",
+    () => {
+
+        if (!localStream) {
+
+            return;
+
+        }
+
+
+        const audioTracks =
+            localStream.getAudioTracks();
+
+
+        audioTracks.forEach(
+            track => {
+
+                track.enabled =
+                    !track.enabled;
+
+            }
+        );
+
+
+        isMuted =
+            !isMuted;
+
+
+        if (isMuted) {
+
+            muteBtn.innerText =
+                "🔇 Unmute";
+
+        }
+
+        else {
+
+            muteBtn.innerText =
+                "🎤 Mute";
+
+        }
+
+    }
+);
+
+
+/* ============================================================
+   CAMERA ON/OFF
+   ============================================================ */
+
+cameraBtn.addEventListener(
+    "click",
+    () => {
+
+        if (!localStream) {
+
+            return;
+
+        }
+
+
+        const videoTracks =
+            localStream.getVideoTracks();
+
+
+        videoTracks.forEach(
+            track => {
+
+                track.enabled =
+                    !track.enabled;
+
+            }
+        );
+
+
+        isCameraOff =
+            !isCameraOff;
+
+
+        if (isCameraOff) {
+
+            cameraBtn.innerText =
+                "📹 Camera On";
+
+        }
+
+        else {
+
+            cameraBtn.innerText =
+                "📹 Camera Off";
+
+        }
+
+    }
+);
+
+
+/* ============================================================
+   END CALL BUTTON
+   ============================================================ */
+
+endCall.addEventListener(
+    "click",
+    () => {
+
+        endVideoCall(
+            true
+        );
+
+    }
+);
+
+
+/* ============================================================
+   CLOSE PEER CONNECTION
+   ============================================================ */
+
+function closePeerConnection() {
+
+    if (peerConnection) {
+
+        try {
+
+            peerConnection.close();
+
+        }
+
+        catch (error) {
+
+            console.log(
+                error
+            );
+
+        }
+
+    }
+
+
+    peerConnection =
+        null;
+
+
+    pendingIceCandidates =
+        [];
+
+}
+
+
+/* ============================================================
+   END VIDEO CALL
+   ============================================================ */
+
+function endVideoCall(
+    notifyOtherUser = false
+) {
+
+    console.log(
+        "Ending video call"
+    );
+
+
+    /*
+       Stop camera/microphone
+    */
+
+    if (localStream) {
+
+        localStream
+            .getTracks()
+            .forEach(
+                track => {
+
+                    track.stop();
+
+                }
+            );
+
+    }
+
+
+    localStream =
+        null;
+
+
+    /*
+       Close WebRTC
+    */
+
+    closePeerConnection();
+
+
+    /*
+       Clear videos
+    */
+
+    localVideo.srcObject =
+        null;
+
+
+    remoteVideo.srcObject =
+        null;
+
+
+    remoteVideo.style.display =
+        "none";
+
+
+    waiting.style.display =
+        "block";
+
+
+    /*
+       Reset state
+    */
+
+    isCallStarted =
+        false;
+
+
+    isMuted =
+        false;
+
+
+    isCameraOff =
+        false;
+
+
+    startCall.disabled =
+        false;
+
+
+    muteBtn.disabled =
+        true;
+
+
+    cameraBtn.disabled =
+        true;
+
+
+    endCall.disabled =
+        true;
+
+
+    muteBtn.innerText =
+        "🎤 Mute";
+
+
+    cameraBtn.innerText =
+        "📹 Camera Off";
+
+
+    /*
+       Notify other user only when
+       THIS user clicked End Call.
+
+       This prevents an infinite call-ended loop.
+    */
+
+    if (notifyOtherUser) {
+
+        socket.emit(
+            "end-call",
+            {
+                room: ROOM
+            }
+        );
+
+    }
+
+
+    setStatus(
+        "Call ended"
+    );
+
+}
+
+
+/* ============================================================
+   OTHER USER ENDED CALL
+   ============================================================ */
+
+socket.on(
+    "call-ended",
+    () => {
+
+        console.log(
+            "Other participant ended call"
+        );
+
+
+        /*
+           Do NOT send end-call back.
+        */
+
+        endVideoCall(
+            false
+        );
+
+    }
+);
+
+
+/* ============================================================
+   COPY ROOM LINK
+   ============================================================ */
+
+copyBtn.addEventListener(
+    "click",
+    async () => {
+
+        try {
+
+            await navigator.clipboard.writeText(
+                roomLink.value
+            );
+
+
+            copyBtn.innerText =
+                "Copied!";
+
+
+            setTimeout(
+                () => {
+
+                    copyBtn.innerText =
+                        "Copy Link";
+
+                },
+                1500
+            );
+
+        }
+
+        catch (error) {
+
+            roomLink.select();
+
+
+            document.execCommand(
+                "copy"
+            );
+
+
+            copyBtn.innerText =
+                "Copied!";
+
+
+            setTimeout(
+                () => {
+
+                    copyBtn.innerText =
+                        "Copy Link";
+
+                },
+                1500
+            );
+
+        }
+
+    }
+);
+
+
+/* ============================================================
+   PAGE CLOSE
+   ============================================================ */
+
+window.addEventListener(
+    "beforeunload",
+    () => {
+
+        if (localStream) {
+
+            localStream
+                .getTracks()
+                .forEach(
+                    track => {
+
+                        track.stop();
+
+                    }
+                );
+
+        }
+
+    }
+);
+
+
+</script>
+
+</body>
+
+</html>
