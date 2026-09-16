@@ -3,9 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>FreelanceHub - Video Call</title>
 
 <style>
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -19,13 +21,19 @@ body {
     min-height: 100vh;
 }
 
+/* =========================
+   HEADER
+========================= */
+
 .header {
     height: 70px;
-    background: #fff;
+    background: #ffffff;
     border-bottom: 1px solid #e5e7eb;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     padding: 0 28px;
 }
 
@@ -38,164 +46,297 @@ body {
 .back-btn {
     text-decoration: none;
     color: #374151;
+
     font-weight: 600;
+
     padding: 10px 16px;
+
     border: 1px solid #d1d5db;
     border-radius: 8px;
-    background: #fff;
+
+    background: #ffffff;
 }
 
 .back-btn:hover {
     background: #f3f4f6;
 }
 
+
+/* =========================
+   PAGE
+========================= */
+
 .page {
     max-width: 1250px;
+
     margin: 0 auto;
+
     padding: 28px 20px 40px;
 }
 
+
+/* =========================
+   TOP SECTION
+========================= */
+
 .top-section {
+
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
+
     gap: 20px;
+
     margin-bottom: 20px;
 }
 
 .title-area h1 {
+
     font-size: 28px;
+
     margin-bottom: 7px;
 }
 
 .title-area p {
+
     color: #6b7280;
+
     font-size: 14px;
 }
 
+
+/* =========================
+   ROOM BOX
+========================= */
+
 .room-box {
-    background: #fff;
+
+    background: #ffffff;
+
     border: 1px solid #e5e7eb;
+
     border-radius: 10px;
+
     padding: 14px 16px;
+
     min-width: 320px;
 }
 
 .room-label {
+
     font-size: 12px;
+
     color: #6b7280;
+
     margin-bottom: 6px;
+
     font-weight: 600;
+
     text-transform: uppercase;
 }
 
 .room-name {
+
     font-size: 14px;
+
     font-weight: 700;
+
     word-break: break-all;
 }
 
+
+/* =========================
+   JITSI CONTAINER
+========================= */
+
 .call-container {
+
     background: #111827;
+
     border-radius: 14px;
+
     overflow: hidden;
+
     min-height: 650px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, .12);
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.12);
 }
 
 #jitsi-container {
+
     width: 100%;
+
     height: 650px;
 }
 
+
+/* =========================
+   LOADING
+========================= */
+
 .loading {
+
     min-height: 650px;
+
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
+
     justify-content: center;
-    color: #fff;
+
+    color: #ffffff;
+
     text-align: center;
+
     padding: 30px;
 }
 
 .loading h2 {
+
     margin-bottom: 10px;
 }
 
 .loading p {
+
     color: #d1d5db;
+
     max-width: 550px;
+
     line-height: 1.6;
 }
 
 .status {
+
     margin-top: 10px;
+
     font-weight: 600;
+
     color: #93c5fd;
 }
 
+
+/* =========================
+   INFORMATION BOX
+========================= */
+
 .info {
+
     margin-top: 18px;
-    background: #fff;
+
+    background: #ffffff;
+
     border: 1px solid #e5e7eb;
+
     border-radius: 10px;
+
     padding: 16px;
+
     color: #6b7280;
+
     font-size: 14px;
+
     line-height: 1.6;
 }
+
+
+/* =========================
+   RESPONSIVE
+========================= */
 
 @media (max-width: 700px) {
 
     .header {
+
         padding: 0 15px;
     }
 
     .page {
+
         padding: 20px 12px;
     }
 
     .top-section {
+
         flex-direction: column;
+
         align-items: stretch;
     }
 
     .room-box {
+
         min-width: 0;
     }
 
     .call-container,
     #jitsi-container,
     .loading {
+
         min-height: 550px;
+
         height: 550px;
     }
+
 }
+
 </style>
+
 </head>
+
 
 <body>
 
-<header class="header">
-    <div class="logo">FreelanceHub</div>
 
-    <a href="javascript:history.back()" class="back-btn">
+<!-- =========================
+     HEADER
+========================= -->
+
+<header class="header">
+
+    <div class="logo">
+        FreelanceHub
+    </div>
+
+    <a
+        href="javascript:history.back()"
+        class="back-btn"
+    >
         ← Back
     </a>
+
 </header>
+
+
+<!-- =========================
+     MAIN PAGE
+========================= -->
 
 <main class="page">
 
+
+    <!-- =========================
+         TITLE + ROOM
+    ========================== -->
+
     <section class="top-section">
 
+
         <div class="title-area">
-            <h1>Video Call</h1>
+
+            <h1>
+                Video Call
+            </h1>
 
             <p>
                 Real-time communication between client and freelancer.
             </p>
+
         </div>
+
 
         <div class="room-box">
 
@@ -203,18 +344,29 @@ body {
                 Meeting Room
             </div>
 
-            <div id="room-name" class="room-name">
+            <div
+                id="room-name"
+                class="room-name"
+            >
                 Creating room...
             </div>
 
         </div>
 
+
     </section>
 
 
+
+    <!-- =========================
+         JITSI VIDEO CALL
+    ========================== -->
+
     <section class="call-container">
 
+
         <div id="jitsi-container">
+
 
             <div class="loading">
 
@@ -226,50 +378,79 @@ body {
                     Please wait while the meeting room is being prepared.
                 </p>
 
-                <div id="status" class="status">
+                <div
+                    id="status"
+                    class="status"
+                >
                     Connecting to FreelanceHub Jitsi server...
                 </div>
 
             </div>
 
+
         </div>
+
 
     </section>
 
 
+
+    <!-- =========================
+         INFORMATION
+    ========================== -->
+
     <div class="info">
 
-        <strong>Video Call:</strong>
+        <strong>
+            Video Call:
+        </strong>
 
-        This page uses the FreelanceHub self-hosted Jitsi Meet server
-        for video conferencing. Camera, microphone, screen sharing,
-        chat, and participant controls are available in the meeting toolbar.
+        This meeting is powered by the
+        FreelanceHub self-hosted Jitsi server.
+
+        Camera, microphone, screen sharing,
+        chat, participant controls, and meeting
+        features are provided by Jitsi.
 
     </div>
+
 
 </main>
 
 
-<!--
-    IMPORTANT:
-    The Jitsi API is now loaded from OUR OWN Jitsi server,
-    not meet.jit.si.
--->
-<script src="https://98-82-132-234.sslip.io/external_api.js"></script>
+
+<!-- =====================================================
+     SELF-HOSTED JITSI EXTERNAL API
+     
+     IMPORTANT:
+     This is YOUR Jitsi server.
+     
+     It is NOT:
+     https://meet.jit.si/external_api.js
+     
+     It is:
+     https://98-82-132-234.sslip.io/external_api.js
+====================================================== -->
+
+<script
+    src="https://98-82-132-234.sslip.io/external_api.js">
+</script>
+
 
 
 <script>
 
-/* =========================================================
-   FREELANCEHUB SELF-HOSTED JITSI CONFIGURATION
-   ========================================================= */
+/* =====================================================
+   SELF-HOSTED JITSI DOMAIN
+===================================================== */
 
-const JITSI_DOMAIN = "98-82-132-234.sslip.io";
+const JITSI_DOMAIN =
+    "98-82-132-234.sslip.io";
 
 
-/* =========================================================
-   ROOM NAME CLEANING
-   ========================================================= */
+/* =====================================================
+   SANITIZE ROOM NAME
+===================================================== */
 
 function sanitizeRoomName(value) {
 
@@ -281,45 +462,52 @@ function sanitizeRoomName(value) {
 }
 
 
-/* =========================================================
+/* =====================================================
    GET ROOM NAME
-   ========================================================= */
+===================================================== */
 
 function getRoomName() {
 
-    const params = new URLSearchParams(window.location.search);
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
 
-    const roomFromUrl = params.get("room");
+
+    const roomFromUrl =
+        params.get("room");
 
 
     /*
-        If FreelanceHub sends a room name through URL,
-        use that room.
+       If dashboard sends a room name,
+       use that room.
     */
 
-    if (roomFromUrl && roomFromUrl.trim() !== "") {
+    if (
+        roomFromUrl &&
+        roomFromUrl.trim() !== ""
+    ) {
 
-        const cleanRoom = sanitizeRoomName(roomFromUrl);
-
-        sessionStorage.setItem(
-            "freelancehub_jitsi_room",
-            cleanRoom
+        return sanitizeRoomName(
+            roomFromUrl
         );
 
-        return cleanRoom;
     }
 
 
     /*
-        Otherwise reuse the existing session room.
+       Otherwise use an existing session room.
     */
 
     let savedRoom =
-        sessionStorage.getItem("freelancehub_jitsi_room");
+        sessionStorage.getItem(
+            "freelancehub_jitsi_room"
+        );
 
 
     /*
-        If no room exists, create a new unique room.
+       If no room exists,
+       create a new FreelanceHub room.
     */
 
     if (!savedRoom) {
@@ -346,49 +534,63 @@ function getRoomName() {
 }
 
 
-/* =========================================================
+/* =====================================================
    CREATE ROOM
-   ========================================================= */
+===================================================== */
 
-const ROOM = getRoomName();
-
-
-document.getElementById("room-name").textContent = ROOM;
+const ROOM =
+    getRoomName();
 
 
-/* =========================================================
-   STATUS MESSAGE
-   ========================================================= */
+/* =====================================================
+   SHOW ROOM NAME
+===================================================== */
+
+document
+    .getElementById("room-name")
+    .textContent = ROOM;
+
+
+/* =====================================================
+   UPDATE STATUS
+===================================================== */
 
 function updateStatus(message) {
 
     const status =
-        document.getElementById("status");
+        document.getElementById(
+            "status"
+        );
+
 
     if (status) {
 
-        status.textContent = message;
+        status.textContent =
+            message;
 
     }
 
 }
 
 
-/* =========================================================
+/* =====================================================
    START JITSI
-   ========================================================= */
+===================================================== */
 
 function startJitsi() {
 
 
     /*
-        Check whether the Jitsi IFrame API loaded.
+       Check whether the Jitsi API loaded.
     */
 
-    if (typeof JitsiMeetExternalAPI === "undefined") {
+    if (
+        typeof JitsiMeetExternalAPI ===
+        "undefined"
+    ) {
 
         updateStatus(
-            "Jitsi API could not be loaded. Please check the connection."
+            "Jitsi could not be loaded from the FreelanceHub server. Please check the Jitsi server."
         );
 
         return;
@@ -396,34 +598,65 @@ function startJitsi() {
     }
 
 
+    /*
+       Get Jitsi container.
+    */
+
     const container =
-        document.getElementById("jitsi-container");
+        document.getElementById(
+            "jitsi-container"
+        );
 
 
     /*
-        Remove loading screen.
+       Remove loading screen.
     */
 
     container.innerHTML = "";
 
 
-    /* =====================================================
+    /* =================================================
        JITSI OPTIONS
-       ===================================================== */
+    ================================================= */
 
     const options = {
 
-        roomName: ROOM,
 
-        width: "100%",
+        /*
+           IMPORTANT:
+           The room comes from the URL/dashboard.
+        */
 
-        height: "100%",
-
-        parentNode: container,
+        roomName:
+            ROOM,
 
 
         /*
-            User information.
+           Full width.
+        */
+
+        width:
+            "100%",
+
+
+        /*
+           Full height.
+        */
+
+        height:
+            "100%",
+
+
+        /*
+           Put Jitsi inside this div.
+        */
+
+        parentNode:
+            container,
+
+
+        /*
+           FreelanceHub user information.
         */
 
         userInfo: {
@@ -434,26 +667,26 @@ function startJitsi() {
         },
 
 
-        /* =================================================
+        /* =============================================
            JITSI CONFIGURATION
-           ================================================= */
+        ============================================= */
 
         configOverwrite: {
 
-            prejoinPageEnabled: true,
+            /*
+               Show the prejoin screen so the
+               user can check camera/microphone.
+            */
 
-            disableDeepLinking: true,
-
-            startWithAudioMuted: false,
-
-            startWithVideoMuted: false
+            prejoinPageEnabled:
+                true
 
         },
 
 
-        /* =================================================
-           FREELANCEHUB JITSI CONTROLS
-           ================================================= */
+        /* =============================================
+           JITSI TOOLBAR
+        ============================================= */
 
         interfaceConfigOverwrite: {
 
@@ -480,20 +713,29 @@ function startJitsi() {
             ],
 
 
-            SHOW_JITSI_WATERMARK: false,
+            /*
+               Hide Jitsi branding.
+            */
 
-            SHOW_WATERMARK_FOR_GUESTS: false,
+            SHOW_JITSI_WATERMARK:
+                false,
 
-            SHOW_BRAND_WATERMARK: false
+
+            SHOW_WATERMARK_FOR_GUESTS:
+                false,
+
+
+            SHOW_BRAND_WATERMARK:
+                false
 
         }
 
     };
 
 
-    /* =====================================================
-       CREATE JITSI INSTANCE
-       ===================================================== */
+    /* =================================================
+       CREATE JITSI API
+    ================================================= */
 
     const api =
         new JitsiMeetExternalAPI(
@@ -502,9 +744,9 @@ function startJitsi() {
         );
 
 
-    /* =====================================================
-       EVENT: USER JOINED
-       ===================================================== */
+    /* =================================================
+       VIDEO CONFERENCE JOINED
+    ================================================= */
 
     api.addEventListener(
         "videoConferenceJoined",
@@ -518,9 +760,9 @@ function startJitsi() {
     );
 
 
-    /* =====================================================
-       EVENT: PARTICIPANT JOINED
-       ===================================================== */
+    /* =================================================
+       PARTICIPANT JOINED
+    ================================================= */
 
     api.addEventListener(
         "participantJoined",
@@ -534,9 +776,9 @@ function startJitsi() {
     );
 
 
-    /* =====================================================
-       EVENT: PARTICIPANT LEFT
-       ===================================================== */
+    /* =================================================
+       PARTICIPANT LEFT
+    ================================================= */
 
     api.addEventListener(
         "participantLeft",
@@ -550,9 +792,53 @@ function startJitsi() {
     );
 
 
-    /* =====================================================
-       EVENT: USER LEFT
-       ===================================================== */
+    /* =================================================
+       CAMERA ERROR
+    ================================================= */
+
+    api.addEventListener(
+        "cameraError",
+        function (event) {
+
+            console.error(
+                "Jitsi camera error:",
+                event
+            );
+
+
+            updateStatus(
+                "Camera access problem. Please check your browser camera permission."
+            );
+
+        }
+    );
+
+
+    /* =================================================
+       MICROPHONE ERROR
+    ================================================= */
+
+    api.addEventListener(
+        "micError",
+        function (event) {
+
+            console.error(
+                "Jitsi microphone error:",
+                event
+            );
+
+
+            updateStatus(
+                "Microphone access problem. Please check your browser microphone permission."
+            );
+
+        }
+    );
+
+
+    /* =================================================
+       VIDEO CONFERENCE LEFT
+    ================================================= */
 
     api.addEventListener(
         "videoConferenceLeft",
@@ -566,9 +852,9 @@ function startJitsi() {
     );
 
 
-    /* =====================================================
-       EVENT: READY TO CLOSE
-       ===================================================== */
+    /* =================================================
+       READY TO CLOSE
+    ================================================= */
 
     api.addEventListener(
         "readyToClose",
@@ -584,9 +870,9 @@ function startJitsi() {
 }
 
 
-/* =========================================================
+/* =====================================================
    START WHEN PAGE LOADS
-   ========================================================= */
+===================================================== */
 
 window.addEventListener(
     "load",
