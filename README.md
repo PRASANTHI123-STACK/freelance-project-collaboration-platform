@@ -303,3 +303,6 @@ Python
 Visual Studio Code
 Git Bash
 A modern web browser
+
+
+Sprint 8: Jenkins CI pipeline integration completed.
