@@ -1,3 +1,4 @@
+
 import unittest
 from backend.app import app
 
@@ -18,6 +19,9 @@ class FreelanceHubBackendTests(unittest.TestCase):
             b"Backend server is running successfully.",
             response.data
         )
+
+    def test_intentional_failure_demo(self):
+        self.assertEqual(1, 2, "Sprint 9 failure demonstration")
 
 
 if __name__ == "__main__":
