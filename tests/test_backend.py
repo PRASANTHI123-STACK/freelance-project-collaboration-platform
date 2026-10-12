@@ -20,9 +20,6 @@ class FreelanceHubBackendTests(unittest.TestCase):
             response.data
         )
 
-    def test_intentional_failure_demo(self):
-        self.assertEqual(1, 2, "Sprint 9 failure demonstration")
-
 
 if __name__ == "__main__":
     unittest.main()
