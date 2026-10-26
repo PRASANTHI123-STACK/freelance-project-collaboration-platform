@@ -1,0 +1,21 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: freelancehub-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: freelancehub-backend
+  template:
+    metadata:
+      labels:
+        app: freelancehub-backend
+    spec:
+      containers:
+        - name: freelancehub-backend
+          image: mprasanthi123/freelancehub-backend:build-11
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
