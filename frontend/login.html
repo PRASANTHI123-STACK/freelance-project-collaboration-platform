@@ -684,38 +684,34 @@ function loginUser(event) {
     setTimeout(
         function() {
 
+            const postLoginRedirect =
+                sessionStorage.getItem("postLoginRedirect");
 
-            /* =====================
-               CLIENT
-            ===================== */
+            if (postLoginRedirect === "post-project.html") {
 
-            if (
-                role === "client"
-            ) {
+                sessionStorage.removeItem("postLoginRedirect");
 
-                window.location.href =
-                    "client-dashboard.html";
+                if (role === "client") {
+                    window.location.href = "post-project.html";
+                    return;
+                }
 
-                return;
-
+                if (role === "freelancer") {
+                    alert("Only clients can post projects.");
+                    window.location.href = "freelancer-dashboard.html";
+                    return;
+                }
             }
 
-
-            /* =====================
-               FREELANCER
-            ===================== */
-
-            if (
-                role === "freelancer"
-            ) {
-
-                window.location.href =
-                    "freelancer-dashboard.html";
-
+            if (role === "client") {
+                window.location.href = "client-dashboard.html";
                 return;
-
             }
 
+            if (role === "freelancer") {
+                window.location.href = "freelancer-dashboard.html";
+                return;
+            }
 
         },
         700

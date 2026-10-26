@@ -90,8 +90,9 @@
 
             <div class="hero-buttons">
 
-                <a href="post-project.html"
-                   class="primary-btn">
+                <a href="#"
+                   class="primary-btn"
+                   onclick="openPostProject(event)">
 
                     Post a Project
 
@@ -526,8 +527,9 @@
         bring your ideas to life.
     </p>
 
-    <a href="post-project.html"
-       class="secondary-btn">
+    <a href="#"
+       class="secondary-btn"
+       onclick="openPostProject(event)">
 
         Post Your Project
 
@@ -610,6 +612,32 @@
 
 </footer>
 
+
+<script>
+
+function openPostProject(event) {
+
+    event.preventDefault();
+
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+    if (!currentUser) {
+        sessionStorage.setItem("postLoginRedirect", "post-project.html");
+        window.location.href = "login.html";
+        return;
+    }
+
+    const role = String(currentUser.role || "").trim().toLowerCase();
+
+    if (role !== "client") {
+        alert("Only clients can post projects.");
+        return;
+    }
+
+    window.location.href = "post-project.html";
+}
+
+</script>
 
 </body>
 

@@ -452,33 +452,25 @@
 
 <script>
 
-function publishProject(event) {
+(function protectPostProjectPage() {
 
-    event.preventDefault();
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-    const title =
-        document.getElementById("projectTitle").value;
+    if (!currentUser) {
+        sessionStorage.setItem("postLoginRedirect", "post-project.html");
+        window.location.href = "login.html";
+        return;
+    }
 
-    const category =
-        document.getElementById("category").value;
+    const role = String(currentUser.role || "").trim().toLowerCase();
 
-    const budget =
-        document.getElementById("budget").value;
+    if (role !== "client") {
+        alert("Only clients can post projects.");
+        window.location.href = "freelancer-dashboard.html";
+        return;
+    }
 
-    alert(
-        "Project Published Successfully!\n\n" +
-        "Project: " + title + "\n" +
-        "Category: " + category + "\n" +
-        "Budget: ₹" + budget
-    );
-
-    event.target.reset();
-
-    window.location.href = "client-dashboard.html";
-}
-
-</script>
-<script>
+})();
 
 function publishProject(event) {
 
@@ -486,65 +478,31 @@ function publishProject(event) {
 
     const project = {
         id: Date.now(),
-
         title: document.getElementById("projectTitle").value,
-
-        description:
-            document.getElementById("projectDescription").value,
-
-        category:
-            document.getElementById("category").value,
-
-        projectType:
-            document.getElementById("projectType").value,
-
-        skills:
-            document.getElementById("skills").value,
-
-        budget:
-            document.getElementById("budget").value,
-
-        deadline:
-            document.getElementById("deadline").value,
-
-        experience:
-            document.getElementById("experience").value,
-
+        description: document.getElementById("projectDescription").value,
+        category: document.getElementById("category").value,
+        projectType: document.getElementById("projectType").value,
+        skills: document.getElementById("skills").value,
+        budget: document.getElementById("budget").value,
+        deadline: document.getElementById("deadline").value,
+        experience: document.getElementById("experience").value,
         status: "Open",
-
         proposals: 0,
-
         createdAt: new Date().toLocaleDateString()
     };
 
+    let projects = JSON.parse(localStorage.getItem("projects")) || [];
 
-    // Get existing projects
-    let projects =
-        JSON.parse(localStorage.getItem("projects")) || [];
-
-
-    // Add new project
     projects.push(project);
 
+    localStorage.setItem("projects", JSON.stringify(projects));
 
-    // Save projects
-    localStorage.setItem(
-        "projects",
-        JSON.stringify(projects)
-    );
+    alert("Project Published Successfully!");
 
-
-    alert(
-        "Project Published Successfully!"
-    );
-
-
-    // Go to My Projects
     window.location.href = "projects.html";
 }
 
 </script>
-
 </body>
 
 </html>
